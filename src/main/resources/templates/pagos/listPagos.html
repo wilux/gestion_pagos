@@ -1,0 +1,68 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>BPN Gestión | Pagos</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header th:insert="fragments/menu :: menu-principal"></header>
+
+     <main role="main">     
+      <hr>
+      <div class="container"> 
+
+        <div class="card">
+          <h4 class="card-header"><strong>Listado de Pagos</strong></h4>              
+          <div class="card-body">
+            <a class="btn btn-primary" th:href="@{/pagos/create}" title="Crear nueva pago" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nuevo Pago</a>            
+            <hr>
+            <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+            <div class="table-responsive"> 
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Tipo de Pago</th>
+                  <th scope="col">Empresa</th>                  
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Importe Total</th>
+                  <th scope="col">Archivo</th>
+                </tr>
+              </thead>
+              <tbody>
+					<tr th:each="pago : ${pagos}">  
+					<td th:text="${pago.prestacion}"></td>
+					<td th:text="${pago.empresas.nombreEmpresa}"></td>
+					<td th:text="${pago.FechaCreacion}"></td>  
+					<td th:text="${'$'+#numbers.formatDecimal(pago.totalPagado, 0, 2)}"></td>   
+				 <td><a th:href="@{/download?fileName={nombre}(nombre=${pago.archivo}+'.txt')  }  ">Descargar</a></td>				
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+    </main>
+
+    <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>     
+  </body>
+</html>
