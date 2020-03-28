@@ -129,7 +129,7 @@ public class PagosController {
 		String total = String.format("%14s", aux).replace(' ', '0');
 		String fecha = String.format("%-149s",fechaHoy);
 		//Formateo cuerpo
-		String tipo = pago.getPrestacion();
+		//String tipo = pago.getPrestacion();
 		String cuit = String.format("%11s", empresa.getCuit()).replace(' ', '0');
 		String fechaAcred =  String.format(pago.getFechaAcred()).replaceAll("-", "");
 		String prestacion =  String.format("%-10s",pago.getPrestacion());
