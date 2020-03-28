@@ -53,7 +53,7 @@
                 <div class="col-md-6"> 
                   <div class="form-group">
                     <label for="nombre">E-mail</label>
-                    <input type="text" class="form-control"  id="from" name="from" placeholder="Escriba su e-mail" required="required">
+                    <input type="text" class="form-control"  id="email" name="email" placeholder="Escriba su e-mail" required="required">
                   </div>
                 </div>                
               </div> 
@@ -85,5 +85,23 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script type="text/javascript">
+$(document).ready(function() {    
+    $('.button').on('click', function(){
+        //Añadimos la imagen de carga en el contenedor
+        $('#contacto').html('<div class="loading"><img src="images/loader.gif" alt="loading" /><br/>Un momento, por favor...</div>');
+ 
+        $.ajax({
+            type: "POST",
+            url: "/send",
+            success: function(data) {
+                //Cargamos finalmente el contenido deseado
+                $('#contacto').fadeIn(1000).html(data);
+            }
+        });
+        return false;
+    });              
+});    
+</script>
   </body>
 </html>

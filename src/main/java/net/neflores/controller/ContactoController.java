@@ -22,7 +22,7 @@ public class ContactoController {
     private JavaMailSender emailService;
 	
 	@PostMapping("/send")
-	public String conacto(RedirectAttributes attributes, Mail mail, Model model) throws MessagingException, IOException {
+	public String conacto(RedirectAttributes attributes, Mail mail) throws MessagingException, IOException {
 		
 		
 		try {	
@@ -30,11 +30,10 @@ public class ContactoController {
 			SimpleMailMessage msg = new SimpleMailMessage();
 			 
 	        msg.setTo("nestorchoele@gmail.com");
-	        msg.setFrom(mail.getFrom());
 	        msg.setSubject("BPN Gestion - Contacto");
-	        msg.setText(mail.getDescripcion());
+	        msg.setText("Nombre: "+mail.getNombre()+"\nApellido: "+mail.getApellido()+"\nMail: "+mail.getEmail()+"\nMensaje: "+mail.getDescripcion());
 
-
+	        
 	        emailService.send(msg);
 			attributes.addFlashAttribute("msg", "El mensaje fue enviado!.");
 	 
