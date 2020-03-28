@@ -27,11 +27,12 @@
 
 
       <div class="container">
-
+		
         <div class="card">
+        <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
           <h4 class="card-header"><strong>Formulario de Contacto</strong></h4>              
           <div class="card-body">
-            <form>            
+          <form th:action="@{/send}" method="post" th:object="${mail}">               
               <div class="row">
                 <div class="col-md-6"> 
                   <div class="form-group">

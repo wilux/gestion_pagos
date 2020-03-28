@@ -47,6 +47,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				"/signup",
 				"/search",
 				"/contacto",
+				"/send",
 				"/bcrypt/**",
 				"/vacantes/view/**").permitAll()
 		

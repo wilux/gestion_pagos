@@ -35,18 +35,6 @@
 				<div class="card-body">
 					<form th:action="@{/pagos/save}" method="post" > <!-- th:object="${pago}" -->
 					
-					<!--  
-						<div th:if="${#fields.hasErrors('*')}" class='alert alert-danger'
-							role='alert'>
-							Por favor corrija los siguientes errores:
-							<ul>
-								<li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
-							</ul>
-						</div>
-						
-						-->
-
-						<!--/* Guardo id para saber si inserto o actualizo*/-->
 						<input type="hidden" th:field="*{pago.idPago}">
 
 

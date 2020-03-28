@@ -24,6 +24,7 @@
       <div class="container"> 
 
         <div class="card">
+        <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
           <h4 class="card-header"><strong>Datos de la Empresa</strong></h4>              
           <div class="card-body">
             <form th:action="@{/empresas/save}" method="post" th:object="${empresa}">
@@ -40,7 +41,6 @@
                     <!--/* Guardo id para saber si inserto o actualizo*/-->
                     <input type="hidden" th:field="*{idEmpresa}" >
       
-                    <!--/* Guardo ruta de imagen x si actualizo */-->
                     
                     <label for="nombre">Nombre</label>
                     <input type="text" class="form-control" th:field="*{nombreEmpresa}" id="nombreEmpresa" name="nombreEmpresa" placeholder="Escriba el nombre de la Empresa" required="required">
