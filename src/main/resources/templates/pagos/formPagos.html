@@ -34,48 +34,51 @@
 					<strong>Generación de Pagos</strong>
 				</h4>
 				<div class="card-body">
-					<form th:action="@{/pagos/save}" method="post" > <!-- th:object="${pago}" -->
-					
-						<input type="hidden" th:field="*{pago.idPago}">
+					<form th:action="@{/pagos/save}" method="post">
+						<!-- th:object="${pago}" -->
+
+						<!-- 	<input type="hidden" th:field="*{pago.idPago}"> -->
 
 
 						<div class="row">
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label for="empresas">Empresa</label> 
-									
-									<select class="custom-select form-control" name="nombreEmpresa">
-										<option  th:each="emp : ${empresa}" th:value="${emp.nombreEmpresa}" th:text="${emp.nombreEmpresa}" th:data="${emp.idEmpresa}">
-											</option>
-									</select>
-								<input name="idEmpresa" id="idEmpresa" hidden="hidden" value=""/>
+									<label for="empresas">Empresa</label> <select
+										class="custom-select form-control" name="nombreEmpresa">
+										<option th:each="emp : ${empresa}"
+											th:value="${emp.nombreEmpresa}"
+											th:text="${emp.nombreEmpresa}" th:data="${emp.idEmpresa}">
+										</option>
+									</select> <input name="idEmpresa" id="idEmpresa" hidden="hidden"
+										value="" />
 								</div>
 							</div>
 							<div class="col-md-3">
-								<div  th:object="${empresa}" class="form-group">
+								<div th:object="${empresa}" class="form-group">
 									<label for="empresa">Cuit</label> <select class="form-control"
-									 name="cuit">
-										<option th:each="emp : ${empresa}" th:value="${emp.cuit}" th:text="${emp.cuit}"></option>
+										name="cuit">
+										<option th:each="emp : ${empresa}" th:value="${emp.cuit}"
+											th:text="${emp.cuit}"></option>
 									</select>
 
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div th:object="${empresa}" class="form-group">
-									<label for="empresa">Cuenta</label> 
-									<select class="form-control" name="cuenta">
-										<option th:each="emp : ${empresa}" th:value="${emp.cuenta}"  th:text="${emp.cuenta}">
-										</option>
-									</select> 
+									<label for="empresa">Cuenta</label> <select
+										class="form-control" name="cuenta">
+										<option th:each="emp : ${empresa}" th:value="${emp.cuenta}"
+											th:text="${emp.cuenta}"></option>
+									</select>
 								</div>
 							</div>
-							
-							
-		
+
+
+
 							<div class="form-group">
-								<label for="categoria">Prestacion</label> 
-								<select class="form-control" th:field="${pago.prestacion}">
+								<label for="categoria">Prestacion</label> <select
+									class="form-control" th:field="${pago.prestacion}">
 									<option value="SUELDOS">SUELDOS</option>
 									<option value="PROVEEDOR">PROVEEDOR</option>
 								</select>
@@ -84,7 +87,7 @@
 						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group">
-									<label for="salario">Subprestacion</label> <input type="text"
+									<label >Subprestacion</label> <input type="text"
 										class="form-control" th:field="*{pago.subprestacion}"
 										name="subprestacion" id="subprestacion" placeholder="Sub000"
 										required="required">
@@ -92,7 +95,7 @@
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
-									<label for="salario">Referencia</label> <input type="text"
+									<label >Referencia</label> <input type="text"
 										class="form-control" th:field="*{pago.referencia}"
 										name="referencia" id="referencia" placeholder="Referencia"
 										required="required">
@@ -100,23 +103,25 @@
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
-									<label for="fecha">Fecha Actual</label> <input type="hidden"
-										id="fechaCreacion"> <input type="text"
-										class="form-control" th:field="*{pago.fechaCreacion}"
-										name="fechaCreacion" id="fechaCreacion" value=""
-										placeholder="Fecha Actual" disabled>
+									<label for="fecha">Fecha de Acreditación</label> <input
+										type="hidden" id="fechaAcred">
+									<div class="input-append date" id="fecha"
+										data-date-format="dd-mm-yyyy">
+										<input type="text" class="form-control"  name="fechaAcred" readonly>
+										<span class="add-on"><i class="icon-th"></i></span>
+									</div>
 								</div>
 							</div>
+							
 							<div class="col-md-3">
 								<div class="form-group">
-									<label for="fecha">Fecha de Acreditación</label> <input
-										type="hidden" id="fechaAcred"> 
-										<div class="input-append date" id="fecha" data-date-format="dd-mm-yyyy">
-    <input size="16" type="text"  name="fechaAcred" readonly>
-    <span class="add-on"><i class="icon-th"></i></span>
-</div>
+									<input type="hidden" id="fechaCreacion"> <input
+										type="hidden" class="form-control"
+										th:field="*{pago.fechaCreacion}" name="fechaCreacion"
+										id="fechaCreacion">
 								</div>
 							</div>
+
 						</div>
 
 
@@ -163,14 +168,15 @@
 
 							</div>
 							<hr>
-							<button type="submit" id="bt" class="btn btn-primary">Generar Archivo</button>
+							<button type="submit" id="bt" class="btn btn-primary">Generar
+								Archivo</button>
 
-							</div>
+						</div>
 					</form>
-					
+
 				</div>
 
-				
+
 
 			</div>
 
@@ -187,7 +193,8 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 	<script th:src="@{/js/bootstrap-datepicker.js}"></script>
@@ -195,7 +202,7 @@
 	<script th:src="@{/js/code.js}"></script>
 
 
-<script type="text/javascript" language="javascript">
+	<script type="text/javascript">
 $.datepicker.setDefaults($.datepicker.regional['es']);
 $('#fecha').datepicker({
     format: 'dd-mm-yyyy',
