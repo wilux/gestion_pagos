@@ -159,7 +159,7 @@ public class PagosController {
         	}
         
         //Armamos nombre del archivo
-        String nombreFile = empresa.getNombreEmpresa()+"_"+fechaHoy+"_V4";
+        String nombreFile = fechaHoy+"_"+empresa.getNombreEmpresa()+"_"+"_V4";
         
         // Lo agregamos a la bd
         pago.setArchivo(nombreFile);

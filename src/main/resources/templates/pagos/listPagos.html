@@ -36,7 +36,8 @@
                 <tr>
                   <th scope="col">Tipo de Pago</th>
                   <th scope="col">Empresa</th>                  
-                  <th scope="col">Fecha</th>
+                  <th scope="col">Fecha Creacion</th>
+                  <th scope="col">Fecha Acreditacion</th>
                   <th scope="col">Importe Total</th>
                   <th scope="col">Archivo</th>
                 </tr>
@@ -45,7 +46,8 @@
 					<tr th:each="pago : ${pagos}">  
 					<td th:text="${pago.prestacion}"></td>
 					<td th:text="${pago.empresas.nombreEmpresa}"></td>
-					<td th:text="${pago.FechaCreacion}"></td>  
+					<td th:text="${pago.fechaCreacion}"></td>  
+					<td th:text="${pago.fechaAcred}"></td> 
 					<td th:text="${'$'+#numbers.formatDecimal(pago.totalPagado, 0, 2)}"></td>   
 				 <td><a th:href="@{/download?fileName={nombre}(nombre=${pago.archivo}+'.txt')  }  ">Descargar</a></td>				
               </tbody>

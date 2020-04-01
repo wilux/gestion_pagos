@@ -13,6 +13,7 @@
 <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+<link th:href="@{/css/datepicker.css}" rel="stylesheet">
 <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}"
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
@@ -109,9 +110,11 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label for="fecha">Fecha de Acreditación</label> <input
-										type="hidden" id="fechaAcred"> <input type="text"
-										class="form-control" name="fechaAcred" id="fecha"
-										placeholder="Fecha de acreditación" required="required">
+										type="hidden" id="fechaAcred"> 
+										<div class="input-append date" id="fecha" data-date-format="dd-mm-yyyy">
+    <input size="16" type="text"  name="fechaAcred" readonly>
+    <span class="add-on"><i class="icon-th"></i></span>
+</div>
 								</div>
 							</div>
 						</div>
@@ -184,12 +187,21 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{/js/locales/bootstrap-datepicker.es.js}"></script>
 	<script th:src="@{/js/code.js}"></script>
 
+
+<script type="text/javascript" language="javascript">
+$.datepicker.setDefaults($.datepicker.regional['es']);
+$('#fecha').datepicker({
+    format: 'dd-mm-yyyy',
+     language: 'es'
+});
+</script>
 
 </body>
 </html>
