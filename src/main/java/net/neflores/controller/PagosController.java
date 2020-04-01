@@ -32,14 +32,11 @@ import net.neflores.util.Utileria;
 @RequestMapping(value = "/pagos")
 public class PagosController {
 
-	//Fecha actual servidor
-	Date date = Calendar.getInstance().getTime();  
-	DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");  
-	String fechaHoy = dateFormat.format(date);  
-	
-	
-	
-	
+	// Fecha actual servidor
+	Date date = Calendar.getInstance().getTime();
+	DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+	String fechaHoy = dateFormat.format(date);
+
 	@Autowired
 	private IPagosService servicePagos;
 
@@ -64,7 +61,7 @@ public class PagosController {
 		List<Empresa> listaEmpresas = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
 
 		model.addAttribute("empresas", listaEmpresas);
-	
+
 		return "pagos/listPagos";
 	}
 
@@ -86,34 +83,33 @@ public class PagosController {
 		model.addAttribute("empleados", listaEmpleados);
 		// Busco los datos de los pagos y los dejo disponibles
 
-
 		return "pagos/formPagos";
 	}
 
 	@PostMapping(value = "/save")
-	public String guardar (Model model, Pago pago, Empresa empresa, BindingResult result,
-			RedirectAttributes attributes, Authentication auth, @RequestParam String idEmpresa) throws ParseException {
+	public String guardar(Model model, Pago pago, Empresa empresa, BindingResult result, RedirectAttributes attributes,
+			Authentication auth, @RequestParam String idEmpresa) throws ParseException {
 
 		/**
 		 * if (result.hasErrors()) { attributes.addFlashAttribute("msg", "Existen
 		 * errores!"); return "pagos/formPagos"; }
 		 **/
-		//Referenciamos con el usuario
+		// Referenciamos con el usuario
 		String username = auth.getName();
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
-		
+
 		pago.setUsuario(usuario);
-	//	int empresaId = empresa.getIdEmpresa();
-		//System.out.println("Empresa ID: "+empresaId);
-		
+		// int empresaId = empresa.getIdEmpresa();
+		// System.out.println("Empresa ID: "+empresaId);
+
 		// Agrego fecha actual del servidor con formato dd-MM-yyyy
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		String fechaCreacion = formatter.format(date);  
+		String fechaCreacion = formatter.format(date);
 		pago.setFechaCreacion(fechaCreacion);
-	
-		//Limpio
+
+		// Limpio
 		String cuerpo = "";
-		
+
 		// Sumamos importes
 		List<Empleado> listaSimple = serviceEmpleados.buscarPorUsuario(usuario.getIdUsuario());
 		double importeTotal = listaSimple.stream().mapToDouble(o -> o.getImporte()).sum();
@@ -122,74 +118,66 @@ public class PagosController {
 		// Calculo cantidad
 		int cantidadEmpleados = listaSimple.size();
 		pago.setCantidadPagos(cantidadEmpleados);
-		
 
-		//Formateo Cabecera
+		// Formateo Cabecera
 		String cuenta = String.format("%9s", empresa.getCuenta()).replace(' ', '0');
 		String cantidad = String.format("%6s", cantidadEmpleados).replace(' ', '0');
 		DecimalFormat format = new DecimalFormat("0.00");
-		String aux = format.format(importeTotal).replaceAll("\\,","");
+		String aux = format.format(importeTotal).replaceAll("\\,", "");
 		String total = String.format("%14s", aux).replace(' ', '0');
-		//------------
+		// ------------
 
 		String fecha = String.format("%-149s", fechaHoy);
-		//-------------
-		//Formateo cuerpo
-		////String tipo = pago.getPrestacion();
+		// -------------
+		// Formateo cuerpo
+		//// String tipo = pago.getPrestacion();
 		String cuit = String.format("%11s", empresa.getCuit()).replace(' ', '0');
-		String fechaAcred =  String.format(pago.getFechaAcred()).replaceAll("-", "");
-		String prestacion =  String.format("%-10s",pago.getPrestacion());
-		String subPrestacion =  String.format("%-10s", pago.getSubprestacion());
+		String fechaAcred = String.format(pago.getFechaAcred()).replaceAll("-", "");
+		String prestacion = String.format("%-10s", pago.getPrestacion());
+		String subPrestacion = String.format("%-10s", pago.getSubprestacion());
 		String nombreEmpresa = String.format("%15s", empresa.getNombreEmpresa());
-		
-		
-		//------------------Armado de archivo ----------------------------------------
-		
-        //Genero cabecera
-        String cabecera = ("1"+cuenta+cantidad+total+fecha);
-        
-        //Genero el cuerpo     
-        for (Empleado empleado : listaSimple) {
-	  
 
-        	//formateo el importe
-        	Double importe =  empleado.getImporte();
-    		String aux2 = format.format(importe).replaceAll("\\,","");
-    		      	
-        	//Genero las lineas del cuerpo
-        	cuerpo = cuerpo + ("2"+"S"+cuit+String.format("%22s", empleado.getCbu()).replace(' ', '0')+
-        			  String.format("%22s", empleado.getNombre()+" "+empleado.getApellido())+
-      			  fechaAcred+prestacion+subPrestacion+String.format("%-20s","008")+
-      			  String.format("%10s",aux2).replace(' ', '0')+String.format("%-44s","P")+
-      			  nombreEmpresa+"02"+String.format("%11s", empleado.getCuil()).replace(' ', '0'))+"\n";	
-        	}
-        
-        //Armamos nombre del archivo
-        String nombreFile = fechaHoy+"_"+empresa.getNombreEmpresa()+"_"+"_V4";
-        
-        // Lo agregamos a la bd
-        pago.setArchivo(nombreFile);
-        //Generamos el archivo
-        
-        Utileria.crearArchivo(cabecera, cuerpo, nombreFile);
-		
-        
-		
-	    //Asigno el id de la empresa seleccionada    
-        empresa.setIdEmpresa(Integer.parseInt(idEmpresa));
-        pago.setEmpresas(empresa);
-        
-        // Guardamos en BD
-        servicePagos.guardar(pago);
-        
-        //Descargamos
-        
-        
-	
+		// ------------------Armado de archivo ----------------------------------------
+
+		// Genero cabecera
+		String cabecera = ("1" + cuenta + cantidad + total + fecha);
+
+		// Genero el cuerpo
+		for (Empleado empleado : listaSimple) {
+
+			// formateo el importe
+			Double importe = empleado.getImporte();
+			String aux2 = format.format(importe).replaceAll("\\,", "");
+
+			// Genero las lineas del cuerpo
+			cuerpo = cuerpo
+					+ ("2" + "S" + cuit + String.format("%22s", empleado.getCbu()).replace(' ', '0')
+							+ String.format("%22s", empleado.getNombre() + " " + empleado.getApellido()) + fechaAcred
+							+ prestacion + subPrestacion + String.format("%-20s", "008")
+							+ String.format("%10s", aux2).replace(' ', '0') + String.format("%-44s", "P")
+							+ nombreEmpresa + "02" + String.format("%11s", empleado.getCuil()).replace(' ', '0'))
+					+ "\n";
+		}
+
+		// Armamos nombre del archivo
+		String nombreFile = fechaHoy + "_" + empresa.getNombreEmpresa() + "_" + "_V4";
+
+		// Lo agregamos a la bd
+		pago.setArchivo(nombreFile);
+
+		// Generamos el archivo
+
+		Utileria.crearArchivo(cabecera, cuerpo, nombreFile);
+
+		// Asigno el id de la empresa seleccionada
+		empresa.setIdEmpresa(Integer.parseInt(idEmpresa));
+		pago.setEmpresas(empresa);
+
+		// Guardamos en BD
+		servicePagos.guardar(pago);
 		attributes.addFlashAttribute("msg", "Se genero el archivo!");
-        
+
 		return "redirect:/pagos/index";
-		// return "redirect:/pagos/create";
 
 	}
 
@@ -221,8 +209,5 @@ public class PagosController {
 	public String crearEmpleado(Empleado empleado) {
 		return "pagos/importe";
 	}
-	
-
- 
 
 }
