@@ -7,10 +7,10 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Listado de Empleados</title>
+    <title>Listado de Proveedores</title>
     <!-- Bootstrap core CSS -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this tprovate -->
     <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
@@ -25,9 +25,9 @@
       <div class="container"> 
 
         <div class="card">
-          <h4 class="card-header"><strong>Listado de Empleados</strong></h4>              
+          <h4 class="card-header"><strong>Listado de Proveedors</strong></h4>              
           <div class="card-body">
-            <a class="btn btn-primary" th:href="@{/empleados/create}" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nuevo</a>            
+            <a class="btn btn-primary" th:href="@{/proveedores/create}" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nuevo</a>            
             <hr>
             <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
               <div class="table-responsive">  
@@ -35,32 +35,31 @@
               <thead class="thead-light">
                 <tr>
                   <th scope="col">Id</th>
-                  <th scope="col">Nombre</th>
-                   <th scope="col">Apellido</th>
+                  <th scope="col">Razon Social</th>
                   <th scope="col">Cuil</th>
                   <th scope="col">CBU</th>
                   <th scope="col">Modificar</th>
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="empl : ${empleados}">
-                  <th scope="row" th:text="${empl.idEmpleado}"></th>
-                  <td th:text="${empl.nombre}"></td>
-                  <td th:text="${empl.apellido}"></td>
-                  <td th:text="${empl.cuil}"></td>
-                  <td th:text="${empl.cbu}"></td>
+                <tr th:each="prov : ${proveedores}">
+                  <th scope="row" th:text="${prov.idProveedor}"></th>
+                  <td th:text="${prov.nombre}"></td>
+                  <td th:text="${prov.apellido}"></td>
+                  <td th:text="${prov.cuil}"></td>
+                  <td th:text="${prov.cbu}"></td>
                   <td>
-                    <a th:href="@{/empleados/edit/{id} (id=${empl.idEmpleado}) }" class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                    <a th:href="@{/empleados/delete/{id} (id=${empl.idEmpleado}) }" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                    <a th:href="@{/proveedores/edit/{id} (id=${prov.idProveedor}) }" class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                    <a th:href="@{/proveedores/delete/{id} (id=${prov.idProveedor}) }" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
                   </td>
                 </tr>                              
               </tbody>
             </table>
             </div>
-         <nav th:if="${empleados.totalPages > 0}" aria-label="Page navigation example" >
+         <nav th:if="${proveedores.totalPages > 0}" aria-label="Page navigation example" >
          	<ul class="pagination">
-          	 <li class="page-item"><a th:href="@{/empleados/indexPaginate(page=${empleados.number - 1})}" class="page-link">Anterior</a></li>
-         	 <li class="page-item"><a th:href="@{/empleados/indexPaginate(page=${empleados.number + 1})}" class="page-link">Siguiente</a></li>
+          	 <li class="page-item"><a th:href="@{/proveedores/indexPaginate(page=${proveedores.number - 1})}" class="page-link">Anterior</a></li>
+         	 <li class="page-item"><a th:href="@{/proveedores/indexPaginate(page=${proveedores.number + 1})}" class="page-link">Siguiente</a></li>
           	</ul>
         </nav>
             

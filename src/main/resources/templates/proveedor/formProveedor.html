@@ -8,7 +8,7 @@
 <meta name="author" content="">
 <link rel="icon" href="favicon.ico">
 
-<title>Alta de Empleados</title>
+<title>Alta de Proveedores</title>
 <!-- Bootstrap core CSS -->
 <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 <!-- Custom styles for this template -->
@@ -27,10 +27,10 @@
 
 			<div class="card">
 				<h4 class="card-header">
-					<strong>Datos de la Empleado</strong>
+					<strong>Datos de la Proveedor</strong>
 				</h4>
 				<div class="card-body">
-					<form th:action="@{/empleados/save}" method="post"
+					<form th:action="@{/proveedores/save}" method="post"
 						th:object="${empleado}">
 						<div th:if="${#fields.hasErrors('*')}" class='alert alert-danger'
 							role='alert'>
@@ -59,13 +59,13 @@
 								<div class="form-group">
 
 									<!--/* Guardo id para saber si inserto o actualizo*/-->
-									<input type="hidden" th:field="*{idEmpleado}">
+									<input type="hidden" th:field="*{idProveedor}">
 
 									<!--/* Guardo ruta de imagen x si actualizo */-->
 
-									<label for="nombre">Nombre</label> <input type="text"
+									<label for="nombre">Razon Social</label> <input type="text"
 										class="form-control" th:field="*{nombre}" id="nombre"
-										name="nombre" placeholder="Escriba el nombre de la Empleado"
+										name="nombre" placeholder="Escriba el nombre del Proveedor"
 										required="required">
 								</div>
 							</div>
@@ -74,20 +74,9 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="descripcion">Apellido</label> <input type="text"
-										class="form-control" th:field="*{apellido}" id="apellido"
-										name="apellido" placeholder="Escriba el apellido del Empleado"
-										required="required">
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="descripcion">Cuil</label> <input type="text"
-										class="form-control" th:field="*{cuil}" id="cuil" name="cuil"
-										placeholder="Escriba el CUIL del empleado sin guiones"
+									<label for="descripcion">Cuit</label> <input type="text"
+										class="form-control" th:field="*{cuit}" id="cuit" name="cuit"
+										placeholder="Escriba el CUIt del proveedor sin guiones"
 										required="required">
 								</div>
 							</div>
@@ -98,7 +87,7 @@
 								<div class="form-group">
 									<label for="descripcion">CBU</label> <input type="text"
 										class="form-control" th:field="*{cbu}" id="cbu" name="cbu"
-										placeholder="Escriba el numero de CBU del Empleado"
+										placeholder="Escriba el numero de CBU del Proveedor"
 										required="required">
 								</div>
 							</div>
