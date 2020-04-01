@@ -2,6 +2,7 @@ package net.neflores.controller;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -57,7 +58,6 @@ public class PagosController {
 		String username = auth.getName();
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		pago.setUsuario(usuario);
-		
 		List<Pago> listaSimple = servicePagos.buscarPorUsuario(usuario.getIdUsuario());
 		model.addAttribute("pagos", listaSimple);
 		// Busco los datos de las Empresas y los dejo disponibles
@@ -92,7 +92,7 @@ public class PagosController {
 
 	@PostMapping(value = "/save")
 	public String guardar (Model model, Pago pago, Empresa empresa, BindingResult result,
-			RedirectAttributes attributes, Authentication auth, @RequestParam String idEmpresa) {
+			RedirectAttributes attributes, Authentication auth, @RequestParam String idEmpresa) throws ParseException {
 
 		/**
 		 * if (result.hasErrors()) { attributes.addFlashAttribute("msg", "Existen
@@ -105,8 +105,11 @@ public class PagosController {
 		pago.setUsuario(usuario);
 	//	int empresaId = empresa.getIdEmpresa();
 		//System.out.println("Empresa ID: "+empresaId);
-		// Agrego fecha actual del servidor
-		pago.setFechaCreacion(fechaHoy);
+		
+		// Agrego fecha actual del servidor con formato dd-MM-yyyy
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		String fechaCreacion = formatter.format(date);  
+		pago.setFechaCreacion(fechaCreacion);
 	
 		//Limpio
 		String cuerpo = "";
@@ -121,13 +124,16 @@ public class PagosController {
 		pago.setCantidadPagos(cantidadEmpleados);
 		
 
-		//Formateo Ccabecera
+		//Formateo Cabecera
 		String cuenta = String.format("%9s", empresa.getCuenta()).replace(' ', '0');
 		String cantidad = String.format("%6s", cantidadEmpleados).replace(' ', '0');
 		DecimalFormat format = new DecimalFormat("0.00");
 		String aux = format.format(importeTotal).replaceAll("\\,","");
 		String total = String.format("%14s", aux).replace(' ', '0');
-		String fecha = String.format("%-149s",fechaHoy);
+		//------------
+
+		String fecha = String.format("%-149s", fechaHoy);
+		//-------------
 		//Formateo cuerpo
 		////String tipo = pago.getPrestacion();
 		String cuit = String.format("%11s", empresa.getCuit()).replace(' ', '0');

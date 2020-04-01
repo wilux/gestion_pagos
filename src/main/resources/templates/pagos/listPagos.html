@@ -46,7 +46,7 @@
 					<tr th:each="pago : ${pagos}">  
 					<td th:text="${pago.prestacion}"></td>
 					<td th:text="${pago.empresas.nombreEmpresa}"></td>
-					<td th:text="${pago.fechaCreacion}"></td>  
+					<td th:text="${pago.fechaCreacion}"></td>
 					<td th:text="${pago.fechaAcred}"></td> 
 					<td th:text="${'$'+#numbers.formatDecimal(pago.totalPagado, 0, 2)}"></td>   
 				 <td><a th:href="@{/download?fileName={nombre}(nombre=${pago.archivo}+'.txt')  }  ">Descargar</a></td>				
