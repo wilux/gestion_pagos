@@ -31,14 +31,8 @@
 				</h4>
 				<div class="card-body">
 					<form th:action="@{/proveedores/save}" method="post"
-						th:object="${empleado}">
-						<div th:if="${#fields.hasErrors('*')}" class='alert alert-danger'
-							role='alert'>
-							Por favor corrija los siguientes errores:
-							<ul>
-								<li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
-							</ul>
-						</div>
+						th:object="${proveedor}">
+
 
 
 						<div class="col-md-3">
