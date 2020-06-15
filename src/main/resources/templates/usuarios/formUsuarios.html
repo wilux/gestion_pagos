@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-     <title>Gestion EEP | Registro</title>
+     <title>Modificar</title>
     <!-- Bootstrap core CSS -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -25,12 +25,14 @@
       <div class="container"> 
 
         <div class="card">
-          <h4 class="card-header"><strong>Formulario de registro</strong></h4>              
+          <h4 class="card-header"><strong>Usuario</strong></h4>              
           <div class="card-body">
-            <form th:action="@{/signup}" method="post" th:object="${usuario}">        
+            <form th:action="@{/usuarios/save}" method="post" th:object="${usuario}">        
               <div class="row">
                 <div class="col-md-3"> 
                   <div class="form-group">
+                 <!--/* Guardo id para saber si inserto o actualizo*/-->
+					<input type="hidden" th:field="*{idUsuario}">
                     <label for="nombre">Nombre</label>
                     <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" placeholder="Escriba su nombre" required="required">
                     <label for="email">Correo electrónico</label>
@@ -43,7 +45,7 @@
                 </div>
               </div>                  
               <hr>
-              <button type="submit" title="Quiero registrarme." class="btn btn-primary">Registrarse</button>  
+              <button type="submit" title="Modificar Usuario" class="btn btn-primary">Modificar</button>  
             </form>
           </div>
         </div>

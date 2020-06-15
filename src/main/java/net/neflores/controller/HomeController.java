@@ -29,7 +29,7 @@ public class HomeController {
 		
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
+	
 
 	@GetMapping("/")
 	public String mostrarHome(Model model) {
@@ -81,6 +81,12 @@ public class HomeController {
 		return "formLogin";
 	}
 	
+	@GetMapping("/restablecer")
+	public String mostrarRrecuperarPassword(Usuario usuario) {
+		return "formRecuperar";
+	}
+	
+   
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();

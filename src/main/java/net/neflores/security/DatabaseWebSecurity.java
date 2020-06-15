@@ -49,6 +49,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				"/contacto",
 				"/send",
 				"/bcrypt/**",
+				"/restablecer",
 				"/vacantes/view/**").permitAll()
 		
 		// Acceso por Roles del Usuario

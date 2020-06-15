@@ -1,10 +1,10 @@
 package net.neflores.service.db;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import net.neflores.model.Usuario;
 import net.neflores.repository.UsuariosRepository;
 import net.neflores.service.IUsuarioService;
@@ -37,5 +37,15 @@ public class UsuariosServiceJpa implements IUsuarioService {
 	public Usuario buscarPorUsername(String username) {
 		return UsuariosRepo.findByUsername(username);
 	}
+
+	@Override
+	public Usuario buscarPorId(Integer idUsuario) {
+		Optional<Usuario> optional =	UsuariosRepo.findById(idUsuario);
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+			return null;
+	}
+	
 
 }
