@@ -19,9 +19,15 @@
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" sec:authorize="hasAnyAuthority('USUARIO','ADMINISTRADOR')">Pagos</a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" th:href="@{/pagos/index}">Sueldos</a>
-          <a class="dropdown-item" href="#">Proveedores</a>
+          <a class="dropdown-item" th:href="@{/pagos/proveedor/index}">Proveedores</a>
         </div>
 	   </li>
+	   	  <li class="nav-item" sec:authorize="hasAnyAuthority('USUARIO','ADMINISTRADOR')">
+      <a class="nav-link" th:href="@{/altas/index}">Alta de Cuentas</a>
+	  </li>
+	  	  <li class="nav-item" sec:authorize="hasAnyAuthority('USUARIO','ADMINISTRADOR')">
+      <a class="nav-link" th:href="@{/debitos/index}">Debito Directo</a>
+	  </li>
 	   <li class="nav-item" sec:authorize="hasAnyAuthority('SUPERVISOR')">
 	      <a class="nav-link" th:href="@{/usuarios/index}" >Usuarios</a>
 	   </li>

@@ -48,7 +48,7 @@
            
                  
                   <td>
-                	  <a th:href="@{/usuarios/edit/{id} (id=${usuario.idUsuario}) }" class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                	<a th:href="@{/usuarios/edit/{id} (id=${usuario.idUsuario}) }" class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
                     <a th:href="@{/usuarios/delete/{id} (id=${usuario.idUsuario}) }" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
                     <a href="#" onclick="return confirm('¿Quiere bloquear el acceso al usuario?')" class="btn btn-success btn-sm" role="button" title="Bloquear el acceso al sistema para este usuario."><i class="fas fa-lock" aria-hidden="true"></i></a>	
                   </td>

@@ -64,6 +64,22 @@ public class PagosController {
 
 		return "pagos/listPagos";
 	}
+	
+	@GetMapping(value = "/proveedor/index")
+	public String mostrarPagosProveedores(Model model, Pago pago, Authentication auth) {
+
+		String username = auth.getName();
+		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
+		pago.setUsuario(usuario);
+		List<Pago> listaSimple = servicePagos.buscarPorUsuario(usuario.getIdUsuario());
+		model.addAttribute("pagos", listaSimple);
+		// Busco los datos de las Empresas y los dejo disponibles
+		List<Empresa> listaEmpresas = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
+
+		model.addAttribute("empresas", listaEmpresas);
+
+		return "pagos_proveedor/listPagos";
+	}
 
 	@GetMapping(value = "/create")
 	public String crear(Model model, Pago pago, Empresa empresa, BindingResult result, RedirectAttributes attributes,

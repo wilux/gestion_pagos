@@ -55,6 +55,8 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 		// Acceso por Roles del Usuario
 		
 		.antMatchers("/pagos/**").hasAnyAuthority("USUARIO", "ADMINISTRADOR")
+		.antMatchers("/pagos_proveedor/**").hasAnyAuthority("USUARIO", "ADMINISTRADOR")
+		.antMatchers("/debitos/**").hasAnyAuthority("USUARIO", "ADMINISTRADOR")
 		.antMatchers("/empresas/**").hasAnyAuthority("USUARIO", "ADMINISTRADOR")
 		.antMatchers("/empleados/**").hasAnyAuthority("USUARIO", "ADMINISTRADOR")
 		.antMatchers("/tmp/**").hasAnyAuthority("USUARIO", "ADMINISTRADOR")

@@ -1,0 +1,214 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="favicon.ico">
+
+<title>Generacion de Pagos</title>
+<!-- Bootstrap core CSS -->
+<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+<link th:href="@{/css/datepicker.css}" rel="stylesheet">
+<link th:href="@{/bootstrap/css/sticky-footer-navbar.css}"
+	rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+	rel="stylesheet">
+</head>
+
+<body>
+
+	<header th:insert="fragments/menu :: menu-principal"></header>
+
+	<main role="main">
+		<hr>
+		<div class="container">
+
+			<div class="card">
+
+				<h4 class="card-header">
+					<strong>Generación de Pagos</strong>
+				</h4>
+				<div class="card-body">
+					<form th:action="@{/pagos/save}" method="post">
+						<!-- th:object="${pago}" -->
+
+						<!-- 	<input type="hidden" th:field="*{pago.idPago}"> -->
+
+
+						<div class="row">
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="empresas">Empresa</label> <select
+										class="custom-select form-control" name="nombreEmpresa">
+										<option th:each="emp : ${empresa}"
+											th:value="${emp.nombreEmpresa}"
+											th:text="${emp.nombreEmpresa}" th:data="${emp.idEmpresa}">
+										</option>
+									</select> <input name="idEmpresa" id="idEmpresa" hidden="hidden"
+										value="" />
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div th:object="${empresa}" class="form-group">
+									<label for="empresa">Cuit</label> <select class="form-control"
+										name="cuit">
+										<option th:each="emp : ${empresa}" th:value="${emp.cuit}"
+											th:text="${emp.cuit}"></option>
+									</select>
+
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div th:object="${empresa}" class="form-group">
+									<label for="empresa">Cuenta</label> <select
+										class="form-control" name="cuenta">
+										<option th:each="emp : ${empresa}" th:value="${emp.cuenta}"
+											th:text="${emp.cuenta}"></option>
+									</select>
+								</div>
+							</div>
+
+
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label >Prestacion</label> <input type="text"
+										class="form-control" 
+										name="prestacion" id="subprestacion" value="SUELDOS" readonly>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label >Subprestacion</label> <input type="text"
+										class="form-control" th:field="*{pago.subprestacion}"
+										name="subprestacion" id="subprestacion" placeholder="Sub000"
+										required="required">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label >Referencia</label> <input type="text"
+										class="form-control" th:field="*{pago.referencia}"
+										name="referencia" id="referencia" placeholder="Referencia"
+										required="required">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="fecha">Fecha de Acreditación</label> <input
+										type="hidden" id="fechaAcred">
+									<div class="input-append date" id="fecha"
+										data-date-format="dd-mm-yyyy">
+										<input type="text" class="form-control"  name="fechaAcred" readonly>
+										<span class="add-on"><i class="icon-th"></i></span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-md-3">
+								<div class="form-group">
+									<input type="hidden" id="fechaCreacion"> <input
+										type="hidden" class="form-control"
+										th:field="*{pago.fechaCreacion}" name="fechaCreacion"
+										id="fechaCreacion">
+								</div>
+							</div>
+
+						</div>
+
+
+						<div class="card">
+							<h4 class="card-header">
+								<strong>Listado de Empleados</strong>
+							</h4>
+							<div class="card-body">
+								<a class="btn btn-primary" th:href="@{/pagos/createEmpleado}"
+									role="button"><i class="fas fa-file" aria-hidden="true"></i>
+									Nuevo</a>
+								<hr>
+								<div th:if="${msg != null}" class='alert alert-success'
+									th:text="${msg}" role='alert'></div>
+								<div class="table-responsive">
+									<table class="table">
+										<thead class="thead-light">
+											<tr>
+
+												<th scope="col">Nombre</th>
+												<th scope="col">Apellido</th>
+												<th scope="col">Cuil</th>
+												<th scope="col">CBU</th>
+												<th scope="col">Importe</th>
+												<th scope="col">Modificar</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="empl : ${empleados}">
+
+												<td th:text="${empl.nombre}"></td>
+												<td th:text="${empl.apellido}"></td>
+												<td th:text="${empl.cuil}"></td>
+												<td th:text="${empl.cbu}"></td>
+												<td th:text="${empl.importe}"></td>
+												<td><a
+													th:href="@{/pagos/importe/{id} (id=${empl.idEmpleado}) }"
+													class="btn btn-success btn-sm" role="button" title="Editar"><i
+														class="fas fa-pencil-alt" aria-hidden="true"></i></a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+							<hr>
+							<button type="submit" id="bt" class="btn btn-primary">Generar
+								Archivo</button>
+
+						</div>
+					</form>
+
+				</div>
+
+
+
+			</div>
+
+		</div>
+
+
+		<!-- /container -->
+
+
+	</main>
+
+	<footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{/js/locales/bootstrap-datepicker.es.js}"></script>
+	<script th:src="@{/js/code.js}"></script>
+
+
+	<script type="text/javascript">
+$.datepicker.setDefaults($.datepicker.regional['es']);
+$('#fecha').datepicker({
+    format: 'dd-mm-yyyy',
+     language: 'es'
+});
+</script>
+
+</body>
+</html>
