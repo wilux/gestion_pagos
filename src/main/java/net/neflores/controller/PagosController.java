@@ -62,7 +62,7 @@ public class PagosController {
 
 		model.addAttribute("empresas", listaEmpresas);
 
-		return "pagos/listPagos";
+		return "pagos_empleado/listPagos";
 	}
 	
 	@GetMapping(value = "/proveedor/index")
@@ -81,7 +81,7 @@ public class PagosController {
 		return "pagos_proveedor/listPagos";
 	}
 
-	@GetMapping(value = "/create")
+	@GetMapping(value = "/createPagoEmpleado")
 	public String crear(Model model, Pago pago, Empresa empresa, BindingResult result, RedirectAttributes attributes,
 			Authentication auth) {
 
@@ -99,7 +99,28 @@ public class PagosController {
 		model.addAttribute("empleados", listaEmpleados);
 		// Busco los datos de los pagos y los dejo disponibles
 
-		return "pagos/formPagos";
+		return "pagos_empleado/formPagos";
+	}
+	
+	@GetMapping(value = "/createPagoProveedor")
+	public String crearPagoProveedor(Model model, Pago pago, Empresa empresa, BindingResult result, RedirectAttributes attributes,
+			Authentication auth) {
+
+		// Indico el usuario con el que estoy trabajando
+		String username = auth.getName();
+		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
+		pago.setUsuario(usuario);
+		// Agrego fecha
+		pago.setFechaCreacion(fechaHoy);
+		// Busco los datos de las Empresas y los dejo disponibles
+		List<Empresa> listaEmpresas = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
+		model.addAttribute("empresa", listaEmpresas);
+		// Busco los datos de los empleados y los dejo disponibles
+		List<Empleado> listaEmpleados = serviceEmpleados.buscarPorUsuario(usuario.getIdUsuario());
+		model.addAttribute("empleados", listaEmpleados);
+		// Busco los datos de los pagos y los dejo disponibles
+
+		return "pagos_proveedor/formPagos";
 	}
 
 	@PostMapping(value = "/save")
@@ -201,7 +222,7 @@ public class PagosController {
 	public String importe(@PathVariable("id") int idEmpleado, Model model) {
 		Empleado empleado = serviceEmpleados.buscarPorId(idEmpleado);
 		model.addAttribute("empleado", empleado);
-		return "pagos/importe";
+		return "pagos_empleado/importe";
 	}
 
 	// Empleados
@@ -223,7 +244,7 @@ public class PagosController {
 
 	@GetMapping(value = "/createEmpleado")
 	public String crearEmpleado(Empleado empleado) {
-		return "pagos/importe";
+		return "pagos_empleado/importe";
 	}
 
 }
