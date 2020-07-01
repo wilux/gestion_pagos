@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import net.neflores.model.Perfil;
 import net.neflores.model.Usuario;
 import net.neflores.service.IUsuarioService;
+import net.neflores.service.db.UsuariosServiceJpa;
 
 @Controller
 public class HomeController {
@@ -104,7 +106,7 @@ public class HomeController {
 	
 	
 	@PostMapping("/signup")
-	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
+	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) throws DuplicateKeyException{
 		
 		
 		String pwdPlano = usuario.getPassword();
@@ -120,11 +122,18 @@ public class HomeController {
 		perfil.setId(3); // Perfil USUARIO
 		usuario.agregar(perfil);
 		
-		
+		System.out.println("El usuario es: "+serviceUsuarios.buscarPorUsername(usuario.getUsername()));
 		/**
 		 * Guardamos el usuario en la base de datos. El Perfil se guarda automaticamente
 		 */
-		serviceUsuarios.guardar(usuario);
+
+		if (serviceUsuarios.buscarPorUsername(usuario.getUsername()) == null) {
+			serviceUsuarios.guardar(usuario);
+		} else {
+			attributes.addFlashAttribute("msg", "El usuario ya existe!");
+			return "redirect:/signup";
+		}
+				 
 				
 		attributes.addFlashAttribute("msg", "El registro fue guardado correctamente!");
 		

@@ -27,6 +27,7 @@
         <div class="card">
           <h4 class="card-header"><strong>Formulario de registro</strong></h4>              
           <div class="card-body">
+          <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
             <form th:action="@{/signup}" method="post" th:object="${usuario}">        
               <div class="row">
                 <div class="col-md-3"> 
