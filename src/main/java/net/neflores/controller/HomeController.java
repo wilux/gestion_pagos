@@ -47,7 +47,7 @@ public class HomeController {
 		
 		//Recuperamos el rol del usuario que ingresa
 		for (GrantedAuthority rol: auth.getAuthorities()) {
-			System.out.println(rol);
+		//	System.out.println(rol);
 		}
 		
 		//Comprobamos si hay un usuario cargado primero
@@ -122,7 +122,7 @@ public class HomeController {
 		perfil.setId(3); // Perfil USUARIO
 		usuario.agregar(perfil);
 		
-		System.out.println("El usuario es: "+serviceUsuarios.buscarPorUsername(usuario.getUsername()));
+		
 		/**
 		 * Guardamos el usuario en la base de datos. El Perfil se guarda automaticamente
 		 */
@@ -130,12 +130,12 @@ public class HomeController {
 		if (serviceUsuarios.buscarPorUsername(usuario.getUsername()) == null) {
 			serviceUsuarios.guardar(usuario);
 		} else {
-			attributes.addFlashAttribute("msg", "El usuario ya existe!");
+			attributes.addFlashAttribute("msg", "El usuario ya fué utilizado, debe elegir uno distinto.");
 			return "redirect:/signup";
 		}
 				 
 				
-		attributes.addFlashAttribute("msg", "El registro fue guardado correctamente!");
+		attributes.addFlashAttribute("msg", "Usuario registrado exitosamente!");
 		
 		return "redirect:/";
 	}
