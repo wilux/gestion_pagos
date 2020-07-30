@@ -27,7 +27,7 @@ public class ContactoController {
 			 
 	        msg.setTo("nestorchoele@gmail.com");
 	        msg.setSubject("BPN Gestion - Contacto");
-	        msg.setText("Nombre: "+mail.getNombre()+"\nApellido: "+mail.getApellido()+"\nMail: "+mail.getEmail()+"\nMensaje: "+mail.getDescripcion());
+	        msg.setText("Nombre: "+mail.getNombre()+"\nApellido: "+mail.getApellido()+"\nCuit: "+mail.getCuit()+"\nMail: "+mail.getEmail()+"\nMensaje: "+mail.getMensaje());
 
 	        
 	        emailService.send(msg);

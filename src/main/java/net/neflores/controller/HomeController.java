@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import net.neflores.model.Perfil;
 import net.neflores.model.Usuario;
 import net.neflores.service.IUsuarioService;
-import net.neflores.service.db.UsuariosServiceJpa;
+
 
 @Controller
 public class HomeController {
@@ -46,9 +45,9 @@ public class HomeController {
 		String username = auth.getName();
 		
 		//Recuperamos el rol del usuario que ingresa
-		for (GrantedAuthority rol: auth.getAuthorities()) {
+		//for (GrantedAuthority rol: auth.getAuthorities()) {
 		//	System.out.println(rol);
-		}
+		//}
 		
 		//Comprobamos si hay un usuario cargado primero
 		if (session.getAttribute("usuario")==null) {

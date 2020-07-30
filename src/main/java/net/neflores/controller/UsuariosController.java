@@ -1,12 +1,9 @@
 package net.neflores.controller;
 
-import java.sql.SQLException;
+
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -20,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import net.neflores.model.Usuario;
 import net.neflores.service.IUsuarioService;
-import net.neflores.service.db.UsuariosServiceJpa;
+
 
 @Controller
 @RequestMapping("/usuarios")

@@ -5,8 +5,15 @@ public class Mail {
     private String nombre;
     private String apellido;
     private String email;
-    private String descripcion;
+    private String mensaje;
+    private String cuit;
     
+	public String getCuit() {
+		return cuit;
+	}
+	public void setCuit(String cuit) {
+		this.cuit = cuit;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -25,11 +32,11 @@ public class Mail {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getDescripcion() {
-		return descripcion;
+	public String getMensaje() {
+		return mensaje;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}
 
 
