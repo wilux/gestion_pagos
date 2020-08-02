@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
+
 import net.neflores.model.Perfil;
 import net.neflores.model.Usuario;
 import net.neflores.service.IUsuarioService;
@@ -82,6 +84,13 @@ public class HomeController {
 		return "formLogin";
 	}
 	
+	
+	@GetMapping("login-error")
+    public RedirectView setErrorMessage(RedirectAttributes attributes) {
+        attributes.addFlashAttribute("msg", "Usuario o Password invalido!");
+        return new RedirectView("login");
+    }
+
 	@GetMapping("/restablecer")
 	public String mostrarRrecuperarPassword(Usuario usuario) {
 		return "formRecuperar";
@@ -89,9 +98,10 @@ public class HomeController {
 	
    
 	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
+	public String logout(HttpServletRequest request, RedirectAttributes attributes) {
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 		logoutHandler.logout(request, null, null);
+		attributes.addFlashAttribute("msg", "Su sesión ha caducado. Vuelva a iniciar sesión");
 		return "redirect:/login";
 	}
 	
