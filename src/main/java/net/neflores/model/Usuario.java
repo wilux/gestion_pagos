@@ -57,6 +57,10 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 	public String getEmail() {
+		
+	//	if (email == null) {
+	//		return "";
+	//	}
 		return email;
 	}
 	public void setEmail(String email) {

@@ -9,4 +9,6 @@ public interface IUsuarioService {
 	List<Usuario> buscarTodos();
 	Usuario buscarPorUsername(String username);
 	Usuario buscarPorId(Integer idUsuario);	
+	Usuario buscarPorMail(String email);	
+	void updatePassword(String password, Integer idUsuario);
 }

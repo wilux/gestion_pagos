@@ -36,6 +36,15 @@ public class UsuariosController {
     	model.addAttribute("usuarios", lista);
 		return "usuarios/listUsuarios";
 	}
+	
+	
+	@GetMapping("/clave/{id}")
+	public String clave(@PathVariable("id") int idUsuario, Model model) {
+		Usuario usuario =  serviceUsuarios.buscarPorId(idUsuario);
+		model.addAttribute("usuario", usuario);
+		return "usuarios/formClave";
+	}
+	
 	@GetMapping("/delete/{id}")
 	public String eliminar(@PathVariable("id") int idUsuario, RedirectAttributes attributes) {
 		

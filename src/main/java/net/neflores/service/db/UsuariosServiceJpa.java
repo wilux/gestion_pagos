@@ -46,6 +46,18 @@ public class UsuariosServiceJpa implements IUsuarioService {
 		}
 			return null;
 	}
+
+	@Override
+	public Usuario buscarPorMail(String email) {
+		
+			return UsuariosRepo.findByEmail(email);
+
+	}
+
+	@Override
+	public void updatePassword(String password, Integer idUsuario) {
+		UsuariosRepo.updatePassword(password, idUsuario);	
+	}
 	
 
 }

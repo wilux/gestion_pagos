@@ -1,5 +1,6 @@
 package net.neflores.controller;
 
+
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-
 import net.neflores.model.Perfil;
 import net.neflores.model.Usuario;
 import net.neflores.service.IUsuarioService;
@@ -26,7 +26,7 @@ import net.neflores.service.IUsuarioService;
 @Controller
 public class HomeController {
 	
-
+  
 	@Autowired
    	private IUsuarioService serviceUsuarios;
 		
@@ -69,6 +69,8 @@ public class HomeController {
 		return "redirect:/";
 	}
 	
+
+	
 	@GetMapping("/contacto")
 	public String contactar(Usuario usuario) {
 		return "contacto";
@@ -91,10 +93,8 @@ public class HomeController {
         return new RedirectView("login");
     }
 
-	@GetMapping("/restablecer")
-	public String mostrarRrecuperarPassword(Usuario usuario) {
-		return "formRecuperar";
-	}
+
+	
 	
    
 	@GetMapping("/logout")

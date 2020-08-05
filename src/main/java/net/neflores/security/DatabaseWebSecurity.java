@@ -47,6 +47,8 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				"/signup",
 				"/search",
 				"/contacto",
+				"/forgot-password",
+				"/reset-password/**",
 				"/send",
 				"/bcrypt/**",
 				"/restablecer",
