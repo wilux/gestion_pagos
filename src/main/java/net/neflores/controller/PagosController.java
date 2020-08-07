@@ -48,6 +48,8 @@ public class PagosController {
 
 	@Autowired
 	private IEmpleadosService serviceEmpleados;
+	
+	
 
 	@GetMapping(value = "/index")
 	public String mostrarPagos(Model model, Pago pago, Authentication auth) {
@@ -65,22 +67,13 @@ public class PagosController {
 		return "pagos_empleado/listPagos";
 	}
 	
-	@GetMapping(value = "/proveedor/index")
-	public String mostrarPagosProveedores(Model model, Pago pago, Authentication auth) {
+	
 
-		String username = auth.getName();
-		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
-		pago.setUsuario(usuario);
-		List<Pago> listaSimple = servicePagos.buscarPorUsuario(usuario.getIdUsuario());
-		model.addAttribute("pagos", listaSimple);
-		// Busco los datos de las Empresas y los dejo disponibles
-		List<Empresa> listaEmpresas = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
 
-		model.addAttribute("empresas", listaEmpresas);
-
-		return "pagos_proveedor/listPagos";
-	}
-
+	//-----------------------------------------------------
+	// Pago Empleados
+	//------------------------------------------------------
+	
 	@GetMapping(value = "/createPagoEmpleado")
 	public String crear(Model model, Pago pago, Empresa empresa, BindingResult result, RedirectAttributes attributes,
 			Authentication auth) {
@@ -101,6 +94,56 @@ public class PagosController {
 
 		return "pagos_empleado/formPagos";
 	}
+
+	@GetMapping(value = "/createEmpleado")
+	public String crearEmpleado(Empleado empleado) {
+		return "pagos_empleado/importe";
+	}
+	
+	@PostMapping(value = "/saveImporte")
+	public String guardarImporte(Model model, Empleado empleado, BindingResult result, RedirectAttributes attributes,
+			Authentication auth) {
+		if (result.hasErrors()) {
+			System.out.println("Existieron errores");
+			return "empleados/formEmpleados";
+		}
+		String username = auth.getName();
+		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
+		empleado.setUsuario(usuario);
+		serviceEmpleados.guardar(empleado);
+		attributes.addFlashAttribute("msg", "Los datos de las Empleados fueron guardados!");
+		return "redirect:/pagos/create";
+	}
+	
+	@GetMapping("/importe/{id}")
+	public String importe(@PathVariable("id") int idEmpleado, Model model) {
+		Empleado empleado = serviceEmpleados.buscarPorId(idEmpleado);
+		model.addAttribute("empleado", empleado);
+		return "pagos_empleado/importe";
+	}
+
+	
+	//-----------------------------------------------------
+	//Pago Proveedor
+	//-------------------------------------------------------
+	
+	@GetMapping(value = "/proveedor/index")
+	public String mostrarPagosProveedores(Model model, Pago pago, Authentication auth) {
+
+		String username = auth.getName();
+		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
+		pago.setUsuario(usuario);
+		List<Pago> listaSimple = servicePagos.buscarPorUsuario(usuario.getIdUsuario());
+		model.addAttribute("pagos", listaSimple);
+		// Busco los datos de las Empresas y los dejo disponibles
+		List<Empresa> listaEmpresas = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
+
+		model.addAttribute("empresas", listaEmpresas);
+
+		return "pagos_proveedor/listPagos";
+	}
+
+
 	
 	@GetMapping(value = "/createPagoProveedor")
 	public String crearPagoProveedor(Model model, Pago pago, Empresa empresa, BindingResult result, RedirectAttributes attributes,
@@ -122,7 +165,12 @@ public class PagosController {
 
 		return "pagos_proveedor/formPagos";
 	}
-
+	
+	
+	//-----------------------------------------------------
+	// Guardar y Generar archivo txt
+	//-----------------------------------------------------
+	
 	@PostMapping(value = "/save")
 	public String guardar(Model model, Pago pago, Empresa empresa, BindingResult result, RedirectAttributes attributes,
 			Authentication auth, @RequestParam String idEmpresa) throws ParseException {
@@ -134,10 +182,7 @@ public class PagosController {
 		// Referenciamos con el usuario
 		String username = auth.getName();
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
-
 		pago.setUsuario(usuario);
-		// int empresaId = empresa.getIdEmpresa();
-		// System.out.println("Empresa ID: "+empresaId);
 
 		// Agrego fecha actual del servidor con formato dd-MM-yyyy
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -162,11 +207,11 @@ public class PagosController {
 		DecimalFormat format = new DecimalFormat("0.00");
 		String aux = format.format(importeTotal).replaceAll("\\,", "");
 		String total = String.format("%14s", aux).replace(' ', '0');
-		// ------------
-
 		String fecha = String.format("%-149s", fechaHoy);
+		
 		// -------------
 		// Formateo cuerpo
+		
 		//// String tipo = pago.getPrestacion();
 		String cuit = String.format("%11s", empresa.getCuit()).replace(' ', '0');
 		String fechaAcred = String.format(pago.getFechaAcred()).replaceAll("-", "");
@@ -174,6 +219,7 @@ public class PagosController {
 		String subPrestacion = String.format("%-10s", pago.getSubprestacion());
 		String nombreEmpresa = String.format("%15s", empresa.getNombreEmpresa());
 
+		
 		// ------------------Armado de archivo ----------------------------------------
 
 		// Genero cabecera
@@ -217,34 +263,5 @@ public class PagosController {
 		return "redirect:/pagos/index";
 
 	}
-
-	@GetMapping("/importe/{id}")
-	public String importe(@PathVariable("id") int idEmpleado, Model model) {
-		Empleado empleado = serviceEmpleados.buscarPorId(idEmpleado);
-		model.addAttribute("empleado", empleado);
-		return "pagos_empleado/importe";
-	}
-
-	// Empleados
-
-	@PostMapping(value = "/saveImporte")
-	public String guardarImporte(Model model, Empleado empleado, BindingResult result, RedirectAttributes attributes,
-			Authentication auth) {
-		if (result.hasErrors()) {
-			System.out.println("Existieron errores");
-			return "empleados/formEmpleados";
-		}
-		String username = auth.getName();
-		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
-		empleado.setUsuario(usuario);
-		serviceEmpleados.guardar(empleado);
-		attributes.addFlashAttribute("msg", "Los datos de las Empleados fueron guardados!");
-		return "redirect:/pagos/create";
-	}
-
-	@GetMapping(value = "/createEmpleado")
-	public String crearEmpleado(Empleado empleado) {
-		return "pagos_empleado/importe";
-	}
-
+	
 }
