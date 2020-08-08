@@ -18,7 +18,7 @@
 	  <li class="nav-item dropdown" sec:authorize="hasAnyAuthority('USUARIO','ADMINISTRADOR')">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" sec:authorize="hasAnyAuthority('USUARIO','ADMINISTRADOR')">Pagos</a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" th:href="@{/pagos/index}">Sueldos</a>
+          <a class="dropdown-item" th:href="@{/pagos/sueldo/index}">Sueldos</a>
           <a class="dropdown-item" th:href="@{/pagos/proveedor/index}">Proveedores</a>
         </div>
 	   </li>

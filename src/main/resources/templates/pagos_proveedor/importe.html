@@ -24,9 +24,9 @@
       <div class="container"> 
 
         <div class="card">
-          <h4 class="card-header"><strong>Datos de la Empleado</strong></h4>              
+          <h4 class="card-header"><strong>Datos del Proveedor</strong></h4>              
           <div class="card-body">
-            <form th:action="@{/pagos/saveImporte}" method="post" th:object="${empleado}">
+            <form th:action="@{/pagos/proveedor/saveImporte}" method="post" th:object="${proveedor}">
               <div th:if="${#fields.hasErrors('*')}"class='alert alert-danger' role='alert'>
 				Por favor corrija los siguientes errores:
 				<ul>
@@ -38,30 +38,22 @@
                   <div class="form-group">
                     
                     <!--/* Guardo id para saber si inserto o actualizo*/-->
-                    <input type="hidden" th:field="*{idEmpleado}" >
+                    <input type="hidden" th:field="*{idProveedor}" >
       
                     <!--/* Guardo ruta de imagen x si actualizo */-->
                     
-                    <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" placeholder="Escriba el nombre de la Empleado" required="required">
+                    <label for="nombre">Razon Social</label>
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" placeholder="Escriba el nombre del Proveedor" required="required">
                   </div>
                 </div>                
               </div> 
               
-              <div class="row">
-                <div class="col-md-6"> 
-                  <div class="form-group">
-                    <label for="descripcion">Apellido</label>
-                    <input type="text" class="form-control" th:field="*{apellido}" id="apellido" name="apellido" placeholder="Escriba el apellido del Empleado" required="required">
-                  </div> 
-                </div>                
-              </div> 
               
               <div class="row">
                 <div class="col-md-6"> 
                   <div class="form-group">
-                    <label for="descripcion">Cuil</label>
-                    <input type="text" class="form-control" th:field="*{cuil}" id="cuil" name="cuil" placeholder="Escriba el CUIL del empleado sin guiones" required="required">
+                    <label for="descripcion">Cuit</label>
+                    <input type="text" class="form-control" th:field="*{cuit}" id="cuit" name="cuit" placeholder="Escriba el CUIT del Proveedor sin guiones" required="required">
                   </div> 
                 </div>                
               </div> 
@@ -70,7 +62,7 @@
                 <div class="col-md-6"> 
                   <div class="form-group">
                     <label for="descripcion">CBU</label>
-                    <input type="text" class="form-control" th:field="*{cbu}" id="cbu" name="cbu" placeholder="Escriba el numero de CBU del Empleado" required="required">
+                    <input type="text" class="form-control" th:field="*{cbu}" id="cbu" name="cbu" placeholder="Escriba el numero de CBU del Proveedor" required="required">
                   </div> 
                 </div>                
               </div> 

@@ -34,7 +34,7 @@
 					<strong>Generación de Pagos</strong>
 				</h4>
 				<div class="card-body">
-					<form th:action="@{/pagos/save}" method="post">
+					<form th:action="@{/pagos/sueldo/save}" method="post">
 						<!-- th:object="${pago}" -->
 
 						<!-- 	<input type="hidden" th:field="*{pago.idPago}"> -->
@@ -130,7 +130,7 @@
 								<strong>Listado de Empleados</strong>
 							</h4>
 							<div class="card-body">
-								<a class="btn btn-primary" th:href="@{/pagos/createEmpleado}"
+								<a class="btn btn-primary" th:href="@{/pagos/sueldo/createEmpleado}"
 									role="button"><i class="fas fa-file" aria-hidden="true"></i>
 									Nuevo</a>
 								<hr>

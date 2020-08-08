@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import net.neflores.util.MediaTypeUtils;
-import net.neflores.util.Utileria;
+import net.neflores.util.EscribirArchivo;
 
 @Controller
 public class DownloadController {
  
 
-	String fileName = Utileria.getNombre();
-    private static final String DIRECTORY = Utileria.getRUTA();
+	String fileName = EscribirArchivo.getNombre();
+    private static final String DIRECTORY = EscribirArchivo.getRUTA();
  
     @Autowired
     private ServletContext servletContext;
