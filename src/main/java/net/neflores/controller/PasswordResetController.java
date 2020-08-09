@@ -8,10 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import net.neflores.model.PasswordResetDto;
 import net.neflores.model.Usuario;
-import net.neflores.repository.PasswordResetTokenRepository;
+import net.neflores.service.IPasswordResetTokenService;
 import net.neflores.service.IUsuarioService;
 import net.neflores.util.PasswordResetToken;
 
@@ -22,7 +21,7 @@ public class PasswordResetController {
 	@Autowired
 	private IUsuarioService userService;
 	@Autowired
-	private PasswordResetTokenRepository tokenRepository;
+	private IPasswordResetTokenService tokenRepository;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -32,34 +31,35 @@ public class PasswordResetController {
 	}
 
 	@GetMapping
-    public String displayResetPasswordPage(@RequestParam(required = false) String token, Model model,RedirectAttributes attributes) {
+	public String displayResetPasswordPage(@RequestParam(required = false) String token, Model model,
+			RedirectAttributes attributes) {
 
-        PasswordResetToken resetToken = tokenRepository.findByToken(token);
-       
-        System.out.println(token);
-        if (token == null){
-            //model.addAttribute("error", "No se encontro el token para recuperar el password");
-            attributes.addFlashAttribute("error", "No se encontro el token para recuperar el password, haga nueva solicitud!");
-            return "redirect:/forgot-password";
-        } 
-        
-        else if (resetToken.isExpired()){
-          //  model.addAttribute("error", "El Token expiró, haga una nueva solicitud!");
-            attributes.addFlashAttribute("error", "El Token expiró, haga una nueva solicitud!");
-            return "redirect:/forgot-password";
-        } 
-        else {
-            model.addAttribute("token", resetToken.getToken());
-            attributes.addFlashAttribute("msg", "Datos correctos, ahora puede cambiar la contraseña.");
-        }
-        
-        
-        
-        System.out.println(resetToken.isExpired());
-        System.out.println(resetToken.getExpiryDate());
-       // return "redirect:/reset-password";
-        return "reset-password";
-    }
+		PasswordResetToken resetToken = new PasswordResetToken();
+		resetToken = tokenRepository.findByToken(token);
+
+		if (resetToken == null) {
+
+			attributes.addFlashAttribute("error",
+					"No se encontro el token para recuperar el password, haga nueva solicitud!");
+			return "redirect:/forgot-password";
+		}
+
+		else if (resetToken.isExpired()) {
+
+			attributes.addFlashAttribute("error", "El Token expiró, haga una nueva solicitud!");
+			return "redirect:/forgot-password";
+		}
+
+		else {
+			model.addAttribute("token", resetToken.getToken());
+			attributes.addFlashAttribute("msg", "Datos correctos, ahora puede cambiar la contraseña.");
+		}
+
+		System.out.println(resetToken.isExpired());
+		System.out.println(resetToken.getExpiryDate());
+
+		return "reset-password";
+	}
 
 	@PostMapping
 	@Transactional

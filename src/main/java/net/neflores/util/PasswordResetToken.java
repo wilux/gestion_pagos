@@ -5,43 +5,43 @@ import net.neflores.model.Usuario;
 import java.util.Calendar;
 import java.util.Date;
 
+
 @Entity
-@Table(name="passwordresettoken")
+@Table(name = "passwordresettoken")
 public class PasswordResetToken {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String token;
+	@Column(nullable = false, unique = true)
+	private String token;
 
-  	@OneToOne
-  	@JoinColumn(name="user")
-    private Usuario user;
+	@OneToOne
+	@JoinColumn(name = "user")
+	private Usuario user;
 
-  	@Column(nullable = false)
-  	@Temporal(TemporalType.TIMESTAMP)
-    private Date expiryDate;
+	@Column(nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date expiryDate;
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getToken() {
-        return token;
-    }
+	public String getToken() {
+		return token;
+	}
 
-    public void setToken(String token) {
-        this.token = token;
-    }
+	public void setToken(String token) {
+		this.token = token;
+	}
 
-
-    public Usuario getUser() {
+	public Usuario getUser() {
 		return user;
 	}
 
@@ -50,20 +50,21 @@ public class PasswordResetToken {
 	}
 
 	public Date getExpiryDate() {
-        return expiryDate;
-    }
+		return expiryDate;
+	}
 
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
-    }
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
+	}
 
-    public void setExpiryDate(int minutes){
-        Calendar now = Calendar.getInstance();
-        now.add(Calendar.MINUTE, minutes);
-        this.expiryDate = now.getTime();
-    }
+	public void setExpiryDate(int minutes) {
+		Calendar now = Calendar.getInstance();
+		now.add(Calendar.MINUTE, minutes);
+		this.expiryDate = now.getTime();
+	}
 
-    public boolean isExpired() {
-        return new Date().after(this.expiryDate);
-    }
+	public boolean isExpired() {
+		return new Date().after(this.expiryDate);
+	}
+
 }
