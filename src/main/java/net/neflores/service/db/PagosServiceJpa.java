@@ -50,9 +50,14 @@ public class PagosServiceJpa implements IPagosService {
 	}
 
 	@Override
-	public List<Pago> buscarPorUsuario(Integer idUsuario) {
-		return PagosRepo.buscarPorUsuario(idUsuario);
+	public List<Pago> buscarPorUsuarioyPrestacion(Integer idUsuario, String prestacion) {
+		return PagosRepo.buscarPorUsuario(idUsuario, prestacion);
 	}
 
+	@Override
+	public List<Pago> FiltrarPorPreastacion(String prestacion) {
+
+		return PagosRepo.FiltrarPorPrestacion(prestacion);
+	}
 
 }

@@ -16,4 +16,6 @@ public interface IEmpleadosService {
 	void eliminar(Integer idEmpleado);
 	Page<Empleado> buscarTodas(Pageable page);
 	List<Empleado> buscarPorUsuario(Integer idUsuario);
+	//List<Empleado> buscarPorEmpresa(Integer idEmpresa);
+	
 }

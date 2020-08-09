@@ -51,11 +51,11 @@ public class PagosProveedorController {
 		String username = auth.getName();
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		pago.setUsuario(usuario);
-		List<Pago> listaSimple = servicePagos.buscarPorUsuario(usuario.getIdUsuario());
+		List<Pago> listaSimple = servicePagos.buscarPorUsuarioyPrestacion(usuario.getIdUsuario(), "PROVEEDOR");
 		model.addAttribute("pagos", listaSimple);
 		// Busco los datos de las Empresas y los dejo disponibles
 		List<Empresa> listaEmpresas = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
-
+		
 		model.addAttribute("empresas", listaEmpresas);
 
 		return "pagos_proveedor/listPagos";
@@ -99,7 +99,7 @@ public class PagosProveedorController {
 		proveedor.setUsuario(usuario);
 		serviceProveedor.guardar(proveedor);
 		attributes.addFlashAttribute("msg", "Los datos del Proveedor fueron guardados!");
-		return "redirect:/pagos/proveedor/createProveedor";
+		return "redirect:/pagos/proveedor/createPagoProveedor";
 	}
 	
 	

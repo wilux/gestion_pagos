@@ -40,7 +40,8 @@ public class Empleado {
   	@JoinColumn(name="idUsuario")
     private Usuario usuario;
 	
-  	@OneToOne
+
+	@OneToOne
   	@JoinColumn(name="idEmpresa")
     private Empresa empresa;
 

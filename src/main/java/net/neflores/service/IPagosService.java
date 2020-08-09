@@ -14,5 +14,6 @@ public interface IPagosService {
 	Pago buscarPorId(Integer idPago);	
 	void eliminar(Integer idPago);
 	Page<Pago> buscarTodas(Pageable page);
-	List<Pago> buscarPorUsuario(Integer idUsuario);
+	List<Pago> buscarPorUsuarioyPrestacion(Integer idUsuario, String prestacion);
+	List<Pago> FiltrarPorPreastacion(String prestacion);
 }

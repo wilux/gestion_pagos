@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
 
 @Service
-public class EmailService {
+public class IEmailService {
 
     @Autowired
     private JavaMailSender emailSender;

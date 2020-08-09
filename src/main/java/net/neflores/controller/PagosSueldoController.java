@@ -49,11 +49,12 @@ public class PagosSueldoController {
 		String username = auth.getName();
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		pago.setUsuario(usuario);
-		List<Pago> listaSimple = servicePagos.buscarPorUsuario(usuario.getIdUsuario());
+		List<Pago> listaSimple = servicePagos.buscarPorUsuarioyPrestacion(usuario.getIdUsuario(), "SUELDOS");
+
 		model.addAttribute("pagos", listaSimple);
 		// Busco los datos de las Empresas y los dejo disponibles
 		List<Empresa> listaEmpresas = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
-
+									
 		model.addAttribute("empresas", listaEmpresas);
 
 		return "pagos_empleado/listPagos";
@@ -102,7 +103,7 @@ public class PagosSueldoController {
 	
 		serviceEmpleados.guardar(empleado);
 		attributes.addFlashAttribute("msg", "Los datos de las Empleados fueron guardados!");
-		return "redirect:/pagos/create";
+		return "redirect:/pagos/sueldo/createPagoEmpleado";
 	}
 
 	@GetMapping("/importe/{id}")
@@ -130,7 +131,9 @@ public class PagosSueldoController {
 		String username = auth.getName();
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		pago.setUsuario(usuario);
-
+		
+		
+		
 		// Agrego fecha actual del servidor con formato dd-MM-yyyy
 		pago.setFechaCreacion(fecha.fechaCreacion());
 
