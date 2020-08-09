@@ -46,7 +46,7 @@ public class LoginController {
 	
 	@GetMapping("login-error")
     public RedirectView setErrorMessage(RedirectAttributes attributes) {
-        attributes.addFlashAttribute("msg", "Usuario o Password invalido!");
+        attributes.addFlashAttribute("error", "Usuario o Password invalido!");
         return new RedirectView("login");
     }
 
@@ -58,7 +58,7 @@ public class LoginController {
 	public String logout(HttpServletRequest request, RedirectAttributes attributes) {
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 		logoutHandler.logout(request, null, null);
-		attributes.addFlashAttribute("msg", "Su sesión ha caducado. Vuelva a iniciar sesión");
+		attributes.addFlashAttribute("error", "Su sesión ha caducado. Vuelva a iniciar sesión");
 		return "redirect:/login";
 	}
 	
@@ -96,14 +96,14 @@ public class LoginController {
 		if (serviceUsuarios.buscarPorUsername(usuario.getUsername()) == null) {
 			serviceUsuarios.guardar(usuario);
 		} else {
-			attributes.addFlashAttribute("msg", "El usuario ya fué utilizado, debe elegir uno distinto.");
+			attributes.addFlashAttribute("error", "El usuario ya fué utilizado, debe elegir uno distinto.");
 			return "redirect:/signup";
 		}
 				 
 				
 		attributes.addFlashAttribute("msg", "Usuario registrado exitosamente!");
 		
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 

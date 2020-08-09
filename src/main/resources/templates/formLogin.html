@@ -25,7 +25,8 @@
       <div class="container"> 
 
         <div class="card">
-         <div th:if="${msg != null}" class='alert alert-danger' th:text="${msg}" role='alert'></div>
+         <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+         <div th:if="${error != null}" class='alert alert-danger' th:text="${error}" role='alert'></div>
 
           <div class="card-body">
             <form name="form" th:action="@{/login}" method="post" class="form-signin">

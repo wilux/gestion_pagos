@@ -1,6 +1,5 @@
 package net.neflores.controller;
 
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -32,37 +31,33 @@ public class PasswordForgotController {
 	@Autowired
 	private IEmailService emailService;
 
-	
 	@GetMapping
 	public String displayForgotPasswordPage() {
 		return "formRecuperar";
 	}
 
 	@PostMapping
-	public String processForgotPasswordForm(@ModelAttribute("email") String email, BindingResult result, HttpServletRequest request, RedirectAttributes attributes) {
-	
+	public String processForgotPasswordForm(@ModelAttribute("email") String email, BindingResult result,
+			HttpServletRequest request, RedirectAttributes attributes) {
 
 		if (result.hasErrors()) {
-			return "redirect:/formRecuperar";
+			return "redirect:/forgot-password";
 		}
-		System.out.println(email);
-		
-		
+
 		Usuario user = new Usuario();
 		user = userService.buscarPorMail(email);
 		if (user == null) {
-			
-			//result.rejectValue("email", null, "No encontramos una cuenta para el e-mail ingresado!");
-			attributes.addFlashAttribute("msg", "No encontramos una cuenta para el e-mail ingresado!");
-			return "redirect:/login";
-		}
 
+			// result.rejectValue("email", null, "No encontramos una cuenta para el e-mail
+			// ingresado!");
+			attributes.addFlashAttribute("error", "No encontramos una cuenta para el e-mail ingresado!");
+			return "redirect:/forgot-password";
+		}
 
 		PasswordResetToken token = new PasswordResetToken();
 		token.setToken(UUID.randomUUID().toString());
 		token.setUser(user);
 		token.setExpiryDate(30);
-		System.out.println(token.getExpiryDate());
 		tokenRepository.save(token);
 
 		Mail mail = new Mail();
@@ -80,7 +75,7 @@ public class PasswordForgotController {
 		emailService.sendEmail(mail);
 
 		attributes.addFlashAttribute("msg", "Se envio el link a su e-mail para reestablecer la clave!");
-		
+
 		return "redirect:/login";
 
 	}
