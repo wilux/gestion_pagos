@@ -41,8 +41,10 @@ public class EmpleadosServiceJpa implements IEmpleadosService {
 	}
 
 	@Override
-	public void eliminar(Integer idEmpleado) {
-		empleadosRepo.deleteById(idEmpleado);
+	public void eliminar(Empleado empleado) {
+		empleado.setStatus(0);
+		empleadosRepo.save(empleado);
+		//empleadosRepo.deleteById(idEmpleado);
 	}
 
 	@Override

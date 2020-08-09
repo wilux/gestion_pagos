@@ -63,12 +63,13 @@ public class EmpresasController {
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String eliminar(@PathVariable("id") int idEmpresa, RedirectAttributes attributes) {
+	public String eliminar(@PathVariable("id") int idEmpresa,RedirectAttributes attributes) {
 	 
 		try {	
 		
 			// Eliminamos la empresa.
-			serviceEmpresas.eliminar(idEmpresa);		
+			Empresa empresa =  serviceEmpresas.buscarPorId(idEmpresa);
+			serviceEmpresas.eliminar(empresa);		
 			attributes.addFlashAttribute("msg", "La empresa fué eliminada!.");
 	 
 		}catch(Exception ex) {

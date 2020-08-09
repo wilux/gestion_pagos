@@ -13,7 +13,7 @@ public interface IProveedoresService {
 	void guardarLista(List<Proveedor> proveedors);
 	List<Proveedor> buscarTodas();
 	Proveedor buscarPorId(Integer idProveedor);	
-	void eliminar(Integer idProveedor);
+	void eliminar(Proveedor proveedor);
 	Page<Proveedor> buscarTodas(Pageable page);
 	List<Proveedor> buscarPorUsuario(Integer idUsuario);
 }

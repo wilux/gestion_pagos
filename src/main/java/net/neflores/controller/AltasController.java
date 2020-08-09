@@ -85,7 +85,7 @@ public class AltasController {
 		try {	
 		
 			// Eliminamos el empleado.
-			serviceEmpleados.eliminar(idEmpleado);		
+		//	serviceEmpleados.eliminar(idEmpleado);		
 			attributes.addFlashAttribute("msg", "El empleado fué eliminada!.");
 	 
 		}catch(Exception ex) {

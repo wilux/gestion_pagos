@@ -91,7 +91,8 @@ public class ProveedoresController {
 		try {	
 		
 			// Eliminamos el proveedor.
-			serviceProveedores.eliminar(idProveedor);		
+			Proveedor proveedor =  serviceProveedores.buscarPorId(idProveedor);
+			serviceProveedores.eliminar(proveedor);			
 			attributes.addFlashAttribute("msg", "El proveedor fué eliminada!.");
 	 
 		}catch(Exception ex) {

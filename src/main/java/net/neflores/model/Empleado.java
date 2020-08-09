@@ -30,6 +30,7 @@ public class Empleado {
 	private String provinciaNacimiento;
 	private String cbu;
 	private double importe;
+	private int status;
 	
   //	@OneToOne
   	//@JoinColumn(name="idDomicilio")
@@ -110,9 +111,6 @@ public class Empleado {
 		this.empresa = empresa;
 	}
 
-	
-
-
 	public String getTipoDocumento() {
 		return tipoDocumento;
 	}
@@ -169,9 +167,13 @@ public class Empleado {
 		this.provinciaNacimiento = provinciaNacimiento;
 	}
 
+	public int getStatus() {
+		return status;
+	}
 
-
-
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 
 }

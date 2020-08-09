@@ -45,8 +45,10 @@ public class EmpresasServiceJpa implements IEmpresasService {
 	}
 
 	@Override
-	public void eliminar(Integer idEmpresa) {
-		empresasRepo.deleteById(idEmpresa);
+	public void eliminar(Empresa empresa) {
+		empresa.setStatus(0);
+		empresasRepo.save(empresa);
+		//empresasRepo.deleteById(idEmpresa);
 	}
 
 	@Override

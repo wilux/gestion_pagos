@@ -26,6 +26,7 @@ public class Usuario {
 	private String password;
 	private Integer estatus;
 	private Date fechaRegistro;
+	private int status;
 	
 	//Muchos a muchos
 	@ManyToMany(fetch=FetchType.EAGER)
@@ -96,6 +97,17 @@ public class Usuario {
 	}
 	public void setPerfiles(List<Perfil> perfiles) {
 		this.perfiles = perfiles;
+	}
+
+
+	
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 

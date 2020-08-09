@@ -22,7 +22,7 @@ public class Proveedor {
 	private String cuit;
 	private String cbu;
 	private double importe;
-	
+	private int status;
    
   	@OneToOne
   	@JoinColumn(name="idUsuario")
@@ -86,6 +86,16 @@ public class Proveedor {
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+	}
+
+	
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	@Override

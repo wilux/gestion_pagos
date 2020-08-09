@@ -19,6 +19,7 @@ public class Empresa {
 	private String nombreEmpresa;
 	private String cuit;
     private String cuenta;
+    private int status;
     
   //relacion 1 a 1
   	@OneToOne
@@ -27,11 +28,6 @@ public class Empresa {
     private Usuario usuario;
   	
 
-  //	@OneToOne
-  //	@JoinColumn(name="Pago_idPago")
-  //    private Pago pago;
-  	
- 	
 
 	public Integer getIdEmpresa() {
 		return idEmpresa;
@@ -71,6 +67,16 @@ public class Empresa {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	@Override

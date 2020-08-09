@@ -85,7 +85,8 @@ public class EmpleadosController {
 		try {	
 		
 			// Eliminamos el empleado.
-			serviceEmpleados.eliminar(idEmpleado);		
+			Empleado empleado =  serviceEmpleados.buscarPorId(idEmpleado);
+			serviceEmpleados.eliminar(empleado);		
 			attributes.addFlashAttribute("msg", "El empleado fué eliminada!.");
 	 
 		}catch(Exception ex) {

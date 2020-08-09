@@ -13,7 +13,7 @@ public interface IEmpleadosService {
 	void guardarLista(List<Empleado> empleados);
 	List<Empleado> buscarTodas();
 	Empleado buscarPorId(Integer idEmpleado);	
-	void eliminar(Integer idEmpleado);
+	void eliminar(Empleado empleado);
 	Page<Empleado> buscarTodas(Pageable page);
 	List<Empleado> buscarPorUsuario(Integer idUsuario);
 	//List<Empleado> buscarPorEmpresa(Integer idEmpresa);

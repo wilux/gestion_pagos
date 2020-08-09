@@ -41,8 +41,10 @@ public class ProveedoresServiceJpa implements IProveedoresService {
 	}
 
 	@Override
-	public void eliminar(Integer idProveedor) {
-		proveedoresRepo.deleteById(idProveedor);
+	public void eliminar(Proveedor proveedor) {
+		proveedor.setStatus(0);
+		proveedoresRepo.save(proveedor);
+		//proveedoresRepo.deleteById(idProveedor);
 	}
 
 	@Override

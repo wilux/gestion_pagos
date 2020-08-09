@@ -12,7 +12,8 @@ public interface IEmpresasService {
 	void guardar(Empresa empresa);
 	List<Empresa> buscarTodas();
 	Empresa buscarPorId(Integer idEmpresa);	
-	void eliminar(Integer idEmpresa);
+	//void eliminar(Integer idEmpresa);
 	Page<Empresa> buscarTodas(Pageable page);
 	List<Empresa> buscarPorUsuario(Integer idUsuario);
+	void eliminar(Empresa empresa);
 }

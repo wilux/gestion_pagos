@@ -21,7 +21,7 @@ public interface EmpresasRepository extends JpaRepository<Empresa, Integer> {
 	
 	//Consulta personalizada en jpql
 	//Solicito listado de empresas segun usuario logueado
-	 @Query("SELECT e FROM Empresa e JOIN e.usuario u WHERE u.idUsuario =  ?1")
+	 @Query("SELECT e FROM Empresa e JOIN e.usuario u WHERE u.idUsuario =  ?1 AND e.status = 1")
 	 List<Empresa> buscarPorUsuario(int idUsuario);
 
 }
