@@ -56,7 +56,7 @@ public class ProveedoresController {
 	}
 	
     @PostMapping(value = "/save")
-	public String guardar(Model model, Proveedor proveedor, Empresa empresa, BindingResult result, RedirectAttributes attributes,Authentication auth,@RequestParam String idEmpresa) {
+	public String guardar(Model model, Proveedor proveedor, Empresa empresa, BindingResult result, RedirectAttributes attributes,Authentication auth) {
 		if (result.hasErrors()){		
 			System.out.println("Existieron errores");
 			return "proveedores/formProveedor";
@@ -64,9 +64,7 @@ public class ProveedoresController {
 		String username = auth.getName();		
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		proveedor.setUsuario(usuario); 
-		//Asigno el id de la empresa seleccionada    
-        empresa.setIdEmpresa(Integer.parseInt(idEmpresa));
-        proveedor.setEmpresa(empresa);
+        proveedor.setStatus(1);
 		serviceProveedores.guardar(proveedor);
 		attributes.addFlashAttribute("msg", "Los datos de las Proveedores fueron guardados!");		
 		return "redirect:/proveedores/index";
@@ -104,9 +102,13 @@ public class ProveedoresController {
 	
 	
 	@GetMapping("/edit/{id}")
-	public String editar(@PathVariable("id") int idProveedor, Model model) {
+	public String editar(@PathVariable("id") int idProveedor, Model model,Empresa empresa, Authentication auth) {
+		String username = auth.getName();
+		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		Proveedor proveedor =  serviceProveedores.buscarPorId(idProveedor);
+		List<Empresa> listaEmpresas = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
 		model.addAttribute("proveedor", proveedor);
+		model.addAttribute("empresa", listaEmpresas);
 		return "proveedores/formProveedor";
 	}
 	

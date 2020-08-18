@@ -42,10 +42,6 @@ public class Empleado {
     private Usuario usuario;
 	
 
-	@OneToOne
-  	@JoinColumn(name="idEmpresa")
-    private Empresa empresa;
-
 	public Integer getIdEmpleado() {
 		return idEmpleado;
 	}
@@ -103,13 +99,6 @@ public class Empleado {
 		this.usuario = usuario;
 	}
 
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
 
 	public String getTipoDocumento() {
 		return tipoDocumento;

@@ -50,7 +50,7 @@ public class DebitosController {
 	}
 	
     @PostMapping(value = "/save")
-	public String guardar(Model model, Empleado empleado, Empresa empresa, BindingResult result, RedirectAttributes attributes,Authentication auth,@RequestParam String idEmpresa) {
+	public String guardar(Model model, Empleado empleado, Empresa empresa, BindingResult result, RedirectAttributes attributes,Authentication auth) {
 		if (result.hasErrors()){		
 			System.out.println("Existieron errores");
 			return "empleados/formEmpleados";
@@ -58,9 +58,6 @@ public class DebitosController {
 		String username = auth.getName();		
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		empleado.setUsuario(usuario); 
-		//Asigno el id de la empresa seleccionada    
-        empresa.setIdEmpresa(Integer.parseInt(idEmpresa));
-        empleado.setEmpresa(empresa);
 		serviceEmpleados.guardar(empleado);
 		attributes.addFlashAttribute("msg", "Los datos de las Empleados fueron guardados!");		
 		return "redirect:/empleados/index";

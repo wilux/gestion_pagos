@@ -50,7 +50,7 @@ public class EmpleadosController {
 	}
 	
     @PostMapping(value = "/save")
-	public String guardar(Model model, Empleado empleado, Empresa empresa, BindingResult result, RedirectAttributes attributes,Authentication auth,@RequestParam String idEmpresa) {
+	public String guardar(Model model, Empleado empleado, Empresa empresa, BindingResult result, RedirectAttributes attributes,Authentication auth) {
 		if (result.hasErrors()){		
 			System.out.println("Existieron errores");
 			return "empleados/formEmpleados";
@@ -58,9 +58,7 @@ public class EmpleadosController {
 		String username = auth.getName();		
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		empleado.setUsuario(usuario); 
-		//Asigno el id de la empresa seleccionada    
-        empresa.setIdEmpresa(Integer.parseInt(idEmpresa));
-        empleado.setEmpresa(empresa);
+        empleado.setStatus(1);
 		serviceEmpleados.guardar(empleado);
 		attributes.addFlashAttribute("msg", "Los datos de las Empleados fueron guardados!");		
 		return "redirect:/empleados/index";
@@ -98,9 +96,15 @@ public class EmpleadosController {
 	
 	
 	@GetMapping("/edit/{id}")
-	public String editar(@PathVariable("id") int idEmpleado, Model model) {
+	public String editar(@PathVariable("id") int idEmpleado, Model model,Empresa empresa, Authentication auth) {
+		
+		String username = auth.getName();
+		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		Empleado empleado =  serviceEmpleados.buscarPorId(idEmpleado);
+		List<Empresa> listaEmpresas = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
 		model.addAttribute("empleado", empleado);
+		model.addAttribute("empresa", listaEmpresas);
+		
 		return "empleados/formEmpleados";
 	}
 	

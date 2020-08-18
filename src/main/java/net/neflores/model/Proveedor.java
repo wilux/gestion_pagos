@@ -28,9 +28,6 @@ public class Proveedor {
   	@JoinColumn(name="idUsuario")
     private Usuario usuario;
 	
-  	@OneToOne
-  	@JoinColumn(name="idEmpresa")
-    private Empresa empresa;
 
 	public Integer getIdProveedor() {
 		return idProveedor;
@@ -80,13 +77,7 @@ public class Proveedor {
 		this.usuario = usuario;
 	}
 
-	public Empresa getEmpresa() {
-		return empresa;
-	}
 
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
 
 	
 	
@@ -101,7 +92,7 @@ public class Proveedor {
 	@Override
 	public String toString() {
 		return "Proveedor [idProveedor=" + idProveedor + ", nombre=" + nombre + ", cuit=" + cuit + ", cbu=" + cbu
-				+ ", importe=" + importe + ", usuario=" + usuario + ", empresa=" + empresa + "]";
+				+ ", importe=" + importe + ", usuario=" + usuario + "]";
 	}
 
 	

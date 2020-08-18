@@ -52,6 +52,7 @@ public class EmpresasController {
 		String username = auth.getName();
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);		
 		empresa.setUsuario(usuario); 
+		empresa.setStatus(1);
 		serviceEmpresas.guardar(empresa);
 		attributes.addFlashAttribute("msg", "Los datos de las Empresas fueron guardados!");		
 		return "redirect:/empresas/index";
