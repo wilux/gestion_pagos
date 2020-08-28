@@ -23,26 +23,21 @@
 
 	<main role="main">
 		<hr>
-		<div class="container">
+	<div class="container d-flex justify-content-center align-items-center" style="height:70vh;">
 
-			<div class="card">
-				<h4 class="card-header">
-					<strong>Datos de la Empleado</strong>
-				</h4>
-				<div class="card-body">
-					<form th:action="@{/empleados/save}" method="post"
-						th:object="${empleado}">
-						<div th:if="${#fields.hasErrors('*')}" class='alert alert-danger'
-							role='alert'>
-							Por favor corrija los siguientes errores:
-							<ul>
-								<li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
-							</ul>
-						</div>
+        <div class="card" style="width:70vh;">
+        <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+          <h4 class="card-header"><strong>Datos del Empleado</strong></h4>              
+          <div class="card-body">
+            <form th:action="@{/empleados/save}" method="post" th:object="${empleado}">
+              <div th:if="${#fields.hasErrors('*')}"class='alert alert-danger' role='alert'>
+				Por favor corrija los siguientes errores:
+				<ul>
+				<li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+				</ul>
+			  </div>             
 
-
-						<div class="row">
-							<div class="col-md-6">
+		
 								<div class="form-group">
 
 									<!--/* Guardo id para saber si inserto o actualizo*/-->
@@ -55,45 +50,39 @@
 										name="nombre" placeholder="Escriba el nombre de la Empleado"
 										required="required">
 								</div>
-							</div>
-						</div>
+		
 
-						<div class="row">
-							<div class="col-md-6">
 								<div class="form-group">
 									<label for="descripcion">Apellido</label> <input type="text"
 										class="form-control" th:field="*{apellido}" id="apellido"
 										name="apellido" placeholder="Escriba el apellido del Empleado"
 										required="required">
 								</div>
-							</div>
-						</div>
+		
 
-						<div class="row">
-							<div class="col-md-6">
+
 								<div class="form-group">
 									<label for="descripcion">Cuil</label> <input type="text"
 										class="form-control" th:field="*{cuil}" id="cuil" name="cuil"
 										placeholder="Escriba el CUIL del empleado sin guiones"
 										required="required">
 								</div>
-							</div>
-						</div>
+				
 
-						<div class="row">
-							<div class="col-md-6">
+
 								<div class="form-group">
 									<label for="descripcion">CBU</label> <input type="text"
 										class="form-control" th:field="*{cbu}" id="cbu" name="cbu"
 										placeholder="Escriba el numero de CBU del Empleado"
 										required="required">
 								</div>
-							</div>
-						</div>
+
 
 						<hr>
-						<button type="submit" title="Guardar el registro."
-							class="btn btn-primary">Guardar</button>
+              <div class="form-group" align="right">
+              <a class="btn btn-primary" th:href="@{/empleados/index}" role="button">Volver</a>
+              <button type="submit" title="Guardar el registro." class="btn btn-success">Guardar</button>  
+              </div>
 					</form>
 				</div>
 			</div>
@@ -105,13 +94,10 @@
 	<footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
 
 
-	<!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-	<script th:src="@{/js/code.js}"></script>
-</body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>     
+  </body>
 </html>

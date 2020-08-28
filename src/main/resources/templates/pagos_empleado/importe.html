@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
- <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="favicon.ico">
 
-    <title>Importe</title>
-    <!-- Bootstrap core CSS -->
-    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
-    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
-  </head>
+<title>Importe Empleado</title>
+<!-- Bootstrap core CSS -->
+<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+<link th:href="@{/bootstrap/css/sticky-footer-navbar.css}"
+	rel="stylesheet">
+</head>
 
-  <body>
+<body>
 
-    <header th:insert="fragments/menu :: menu-principal"></header>
+	<header th:insert="fragments/menu :: menu-principal"></header>
 
-    <main role="main">     
-      <hr>
-      <div class="container"> 
+	<main role="main">
+		<hr>
+	<div class="container d-flex justify-content-center align-items-center" style="height:70vh;">
 
-        <div class="card">
-          <h4 class="card-header"><strong>Datos de la Empleado</strong></h4>              
+        <div class="card" style="width:70vh;">
+        <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+          <h4 class="card-header"><strong>Datos del Empleado</strong></h4>              
           <div class="card-body">
-            <form th:action="@{/pagos/sueldo/saveImporte}" method="post" th:object="${empleado}">
+           <form th:action="@{/pagos/sueldo/saveImporte}" method="post" th:object="${empleado}">
               <div th:if="${#fields.hasErrors('*')}"class='alert alert-danger' role='alert'>
 				Por favor corrija los siguientes errores:
 				<ul>
 				<li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
 				</ul>
-			  </div>              
-              <div class="row">
-                <div class="col-md-6"> 
-                  <div class="form-group">
+			  </div>             
+
+		
+					<div class="form-group">
                     
                     <!--/* Guardo id para saber si inserto o actualizo*/-->
                     <input type="hidden" th:field="*{idEmpleado}" >
@@ -45,47 +48,41 @@
                     <label for="nombre">Nombre</label>
                     <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" placeholder="Escriba el nombre de la Empleado" required="required">
                   </div>
-                </div>                
-              </div> 
+                    
+
               
-              <div class="row">
-                <div class="col-md-6"> 
+
                   <div class="form-group">
                     <label for="descripcion">Apellido</label>
                     <input type="text" class="form-control" th:field="*{apellido}" id="apellido" name="apellido" placeholder="Escriba el apellido del Empleado" required="required">
                   </div> 
-                </div>                
-              </div> 
-              
-              <div class="row">
-                <div class="col-md-6"> 
+
+
                   <div class="form-group">
                     <label for="descripcion">Cuil</label>
                     <input type="text" class="form-control" th:field="*{cuil}" id="cuil" name="cuil" placeholder="Escriba el CUIL del empleado sin guiones" required="required">
                   </div> 
-                </div>                
-              </div> 
+
               
-           <div class="row">
-                <div class="col-md-6"> 
+ 
                   <div class="form-group">
                     <label for="descripcion">CBU</label>
                     <input type="text" class="form-control" th:field="*{cbu}" id="cbu" name="cbu" placeholder="Escriba el numero de CBU del Empleado" required="required">
                   </div> 
-                </div>                
-              </div> 
+
               
-               <div class="row">
-                <div class="col-md-6"> 
+
                   <div class="form-group">
                     <label for="descripcion">Importe</label>
                     <input type="text" class="form-control" th:field="*{importe}" id="importe" name="importe" placeholder="Importe a pagar" required="required">
                   </div> 
-                </div>                
-              </div> 
+
               
               <hr>
-              <button type="submit" title="Guardar el registro." class="btn btn-primary">Guardar</button>  
+              <div class="form-group" align="right">
+              <a class="btn btn-primary" th:href="@{/pagos/sueldo/index}" role="button">Volver</a>
+              <button type="submit" title="Guardar el registro." class="btn btn-success">Guardar</button>  
+              </div>
             </form>
           </div>
         </div>

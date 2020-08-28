@@ -95,6 +95,7 @@ public class PagosProveedorController {
 		String username = auth.getName();
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		proveedor.setUsuario(usuario);
+		proveedor.setStatus(1);
 		serviceProveedor.guardar(proveedor);
 		attributes.addFlashAttribute("msg", "Los datos del Proveedor fueron guardados!");
 		return "redirect:/pagos/proveedor/createPagoProveedor";

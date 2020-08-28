@@ -100,6 +100,7 @@ public class PagosSueldoController {
 		String username = auth.getName();
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		empleado.setUsuario(usuario);
+		empleado.setStatus(1);
 	
 		serviceEmpleados.guardar(empleado);
 		attributes.addFlashAttribute("msg", "Los datos de las Empleados fueron guardados!");

@@ -21,9 +21,9 @@
 
     <main role="main">     
       <hr>
-      <div class="container"> 
+   	<div class="container d-flex justify-content-center align-items-center" style="height:50vh;">
 
-        <div class="card">
+        <div class="card" style="width:70vh;">
         <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
           <h4 class="card-header"><strong>Datos de la Empresa</strong></h4>              
           <div class="card-body">
@@ -34,39 +34,30 @@
 				<li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
 				</ul>
 			  </div>              
-              <div class="row">
-                <div class="col-md-6"> 
+
                   <div class="form-group">
                     
                     <!--/* Guardo id para saber si inserto o actualizo*/-->
                     <input type="hidden" th:field="*{idEmpresa}" >
-      
-                    
                     <label for="nombre">Nombre</label>
                     <input type="text" class="form-control" th:field="*{nombreEmpresa}" id="nombreEmpresa" name="nombreEmpresa" placeholder="Escriba el nombre de la Empresa" required="required">
-                  </div>
-                </div>                
-              </div> 
-              <div class="row">
-                <div class="col-md-6"> 
+                  </div> 
                   <div class="form-group">
                     <label for="descripcion">Cuit</label>
                     <input type="text" class="form-control" th:field="*{cuit}" id="cuit" name="cuit" placeholder="Escriba el CUIT de la empresa sin guiones" required="required">
                   </div> 
-                </div>                
-              </div> 
-              
-           <div class="row">
-                <div class="col-md-6"> 
+        
                   <div class="form-group">
                     <label for="descripcion">Nro Cuenta</label>
                     <input type="text" class="form-control" th:field="*{cuenta}" id="cuenta" name="cuenta" placeholder="Escriba el numero de la Cuenta" required="required">
                   </div> 
-                </div>                
-              </div> 
+
               
               <hr>
-              <button type="submit" title="Guardar el registro." class="btn btn-primary">Guardar</button>  
+              <div class="form-group" align="right">
+              <a class="btn btn-primary" th:href="@{/empresas/index}" role="button">Volver</a>
+              <button type="submit" title="Guardar el registro." class="btn btn-success">Guardar</button>  
+              </div>
             </form>
           </div>
         </div>

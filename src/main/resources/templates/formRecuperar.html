@@ -1,58 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
- <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="favicon.ico">
 
-     <title>Gestion EEP | Restablecer</title>
-    <!-- Bootstrap core CSS -->
-    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
-    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
-  </head>
+<title>Gestion EEP | Restablecer</title>
+<!-- Bootstrap core CSS -->
+<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+<link th:href="@{/bootstrap/css/sticky-footer-navbar.css}"
+	rel="stylesheet">
+</head>
 
-  <body>
+<body>
 
-    <header th:insert="fragments/menu :: menu-principal"></header>
+	<header th:insert="fragments/menu :: menu-principal"></header>
 
 
-    <main role="main">     
-      <hr>
-      <div class="container"> 
+	<main role="main">
+		<hr>
+		<div class="container d-flex justify-content-center align-items-center" style="height:80vh;">
 
-        <div class="card">
-         <div th:if="${error != null}" class='alert alert-danger' th:text="${error}" role='alert'></div>
-         <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
-          <h4 class="card-header"><strong>Recuperar Contraseña</strong></h4>              
-          <div class="card-body">
-            <form th:action="@{/forgot-password}" th:object="${email}" method="post">        
-              <div class="row">
-                <div class="col-md-3"> 
-                  <div class="form-group">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Escriba su correo electrónico" required="required">
-                  </div> 
-                </div>    
-              </div>                  
-              <hr>
-              <button type="submit" title="Recuperar Contraseña" class="btn btn-primary">Recuperar Contraseña</button> 
-            </form>
-          </div>
-        </div>
-      </div> <!-- /container -->
+	 <div class="row justify-content-center align-items-center"  >
+			<div class="card">
+				<div th:if="${error != null}" class='alert alert-danger'
+					th:text="${error}" role='alert'></div>
+				<div th:if="${msg != null}" class='alert alert-success'
+					th:text="${msg}" role='alert'></div>
+				<h4 class="card-header">
+					<strong>Recuperar Contraseña</strong>
+				</h4>
+				<div class="card-body" >
+					<form th:action="@{/forgot-password}" th:object="${email}"
+						method="post">
 
-    </main>
+						<div class="form-group">
+							<label for="email">Correo electrónico</label> <input type="email"
+								class="form-control" id="email" name="email"
+								placeholder="Escriba su correo electrónico" required="required">
+						</div>
 
-    <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+						<hr>
+						
+							<div class="form-group" align="center">
+								<button type="submit" title="Recuperar Contraseña"
+									class="btn btn-primary">Recuperar Contraseña</button>
+</div>
+					</form>
+				</div>
+			</div>
+			</div>
+		</div>
+		<!-- /container -->
 
-    <!-- Bootstrap core JavaScript
+	</main>
+
+	<footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+
+	<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>     
-  </body>
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</body>
 </html>
