@@ -27,8 +27,8 @@
         <div class="card">
           <h4 class="card-header"><strong>Lista de Debitos</strong></h4>              
           <div class="card-body">
-            <a class="btn btn-primary" th:href="@{/debitos/create}" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nuevo</a>       
-            <a class="btn btn-primary" th:href="@{/altas/create}" role="button"><i class="fas fa-file" aria-hidden="true"></i> Generar Archivo</a>  
+            <a class="btn btn-secondary btn-lg" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nuevo</a>       
+            <a class="btn btn-secondary btn-lg" role="button"><i class="fas fa-file" aria-hidden="true"></i> Generar Archivo</a> 
             <hr>
             <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
               <div class="table-responsive">  
@@ -42,23 +42,13 @@
                   <th scope="col">Importe 3er Vencimiento</th>
                   <th scope="col">Modificar</th>
                 </tr>
-              </thead>
-              <tbody>
-                <tr th:each="empl : ${empleados}">
-                  <td th:text="${empl.cbu}"></td>
-                  <td th:text="${empl.nombre}"></td>
-                  <td>100</td>
-                  <td>120</td>
-                  <td>130</td>
-                  <td>
-                    <a class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                    <a  onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
-                  </td>
-                </tr>                              
+              </thead>                            
               </tbody>
             </table>
             </div>
-
+<div class="alert alert-danger" role="alert">
+ Modulo no disponible por el momento
+</div>
             
           </div>
         </div>

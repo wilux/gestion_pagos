@@ -2,7 +2,6 @@ package net.neflores;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
@@ -12,10 +11,10 @@ public class BpnGestionApplication  extends SpringBootServletInitializer{
 		SpringApplication.run(BpnGestionApplication.class, args);
 	}
 	
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(BpnGestionApplication.class);
-    }
+   // @Override
+    //protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+     //   return builder.sources(BpnGestionApplication.class);
+    //}
 
 }
 

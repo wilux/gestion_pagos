@@ -36,9 +36,11 @@ public class EmpresasController {
 		String username = auth.getName();		
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
 		List<Empresa> listaSimple = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
+		
 		//Convierto la listaSimple en Pageable
 		Page<Empresa> lista = new PageImpl<>(listaSimple);	
 		model.addAttribute("empresas", lista);
+	
 		return "empresas/listEmpresas";		
 	}
 	

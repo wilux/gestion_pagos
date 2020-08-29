@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 
 public class EscribirArchivo {
 
-	private static String RUTA = "C:\\Users\\wilux\\Documents\\MEGAsync\\bpn_gestion\\src\\main\\resources\\templates\\tmp\\";
+	private static String RUTA = System.getProperty("user.dir")+"\\src\\main\\resources\\templates\\tmp\\";
 
 	private static String NOMBRE;
 

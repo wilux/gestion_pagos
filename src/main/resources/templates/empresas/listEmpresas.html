@@ -42,6 +42,7 @@
                 </tr>
               </thead>
               <tbody>
+              
                 <tr th:each="emp : ${empresas}">
                   <th scope="row" th:text="${emp.idEmpresa}"></th>
                   <td th:text="${emp.nombreEmpresa}"></td>
@@ -51,25 +52,24 @@
                     <a th:href="@{/empresas/edit/{id} (id=${emp.idEmpresa}) }" class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
                     <a th:href="@{/empresas/delete/{id} (id=${emp.idEmpresa}) }" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
                   </td>
-                </tr>                              
+                                             
               </tbody>
             </table>
+            <div th:if="${empresas.isEmpty()}"><div class="alert alert-warning" role="alert">
+							No hay Empresas cargadas! Puede agregar una haciendo click en <a
+								th:href="@{/empresas/create}" class="alert-link">aquí</a> o en
+							el botón "Nueva"
+						</div></div><br>
             </div>
+         
+         <!--     
          <nav th:if="${empresas.totalPages > 0}" aria-label="Page navigation example" >
          	<ul class="pagination">
           	 <li class="page-item"><a th:href="@{/empresas/index(page=${empresas.number - 1})}" class="page-link">Anterior</a></li>
          	 <li class="page-item"><a th:href="@{/empresas/index(page=${empresas.number + 1})}" class="page-link">Siguiente</a></li>
           	</ul>
         </nav>
- <!--        
-       <nav th:unless="${empresas.totalPages == 0}" aria-label="Page navigation example" >
- 			<div class="card-body">
- 			<h1>No hay Empresas! Agrega una para comenzar.</h1>
- 			</div>
-        </nav>
-        
-  -->    
-            
+ 		 -->
           </div>
         </div>
       </div> <!-- /container -->

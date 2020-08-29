@@ -53,6 +53,11 @@
               </tbody>
             </table>
             </div>
+            <div th:if="${pagos.size()==0}"><div class="alert alert-warning" role="alert">
+							No hay Pagos cargados! Puede agregar uno haciendo click en <a
+								th:href="@{/pagos/sueldo/createPagoEmpleado}" class="alert-link">aquí</a> o en
+							el botón "Nuevo Pago"
+						</div></div><br>
           </div>
         </div>
       </div> <!-- /container -->

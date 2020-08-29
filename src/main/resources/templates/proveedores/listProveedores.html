@@ -58,13 +58,20 @@
             </table>
             </div>
             
-        
+        <div th:if="${proveedores.isEmpty()}"><div class="alert alert-warning" role="alert">
+							No hay Proveedores cargados! Puede agregar uno haciendo click  <a
+								th:href="@{/proveedores/create}" class="alert-link">aquí</a> o en
+							el botón "Nuevo"
+						</div>
+						
+		<!--  
          <nav th:if="${proveedores.totalPages > 0}" aria-label="Page navigation example" >
          	<ul class="pagination">
           	 <li class="page-item"><a th:href="@{/proveedores/indexPaginate(page=${proveedores.number - 1})}" class="page-link">Anterior</a></li>
          	 <li class="page-item"><a th:href="@{/proveedores/indexPaginate(page=${proveedores.number + 1})}" class="page-link">Siguiente</a></li>
           	</ul>
         </nav>
+        -->
           
           </div>
         </div>

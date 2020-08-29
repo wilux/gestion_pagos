@@ -45,6 +45,7 @@ public class EmpleadosController {
 		List<Empleado> listaSimple = serviceEmpleados.buscarPorUsuario(usuario.getIdUsuario());
 		Page<Empleado> lista = new PageImpl<>(listaSimple);	
     	model.addAttribute("empleados", lista);
+    
 		return "empleados/listEmpleados";		
 	}
 	
