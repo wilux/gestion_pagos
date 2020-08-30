@@ -14,6 +14,7 @@ import net.neflores.service.IPasswordResetTokenService;
 import net.neflores.service.IUsuarioService;
 import net.neflores.util.PasswordResetToken;
 
+
 @Controller
 @RequestMapping("/reset-password")
 public class PasswordResetController {
@@ -55,8 +56,6 @@ public class PasswordResetController {
 			attributes.addFlashAttribute("msg", "Datos correctos, ahora puede cambiar la contraseña.");
 		}
 
-		System.out.println(resetToken.isExpired());
-		System.out.println(resetToken.getExpiryDate());
 
 		return "reset-password";
 	}
@@ -77,8 +76,8 @@ public class PasswordResetController {
 		String updatedPassword = passwordEncoder.encode(form.getPassword());
 		userService.updatePassword(updatedPassword, user.getIdUsuario());
 		tokenRepository.delete(token);
-
-		return "redirect:/login?resetSuccess";
+		redirectAttributes.addFlashAttribute("msg", "La contraseña fue reestablecida!");		
+		return "redirect:/login";
 	}
 
 }
