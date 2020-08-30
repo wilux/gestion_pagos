@@ -21,13 +21,7 @@
 	<header th:insert="fragments/menu :: menu-principal"></header>
 
 	<main role="main">
-		<hr>
-
-		<br /> <br /> <br />
-
-
-	<div class="container d-flex justify-content-center align-items-center" style="height:50vh;">
-
+	<div class="container d-flex justify-content-center align-items-center" style="height:80vh;">
 			<div class="card" style="width:70vh;">
 				<div th:if="${msg != null}" class='alert alert-success'
 					th:text="${msg}" role='alert'></div>
@@ -35,7 +29,10 @@
 					<strong>Formulario de Contacto</strong>
 				</h4>
 				<div class="card-body">
+				
 					<form th:action="@{/send}" method="post" th:object="${mail}">
+					
+					
 						<div class="form-group">
 							<label for="nombre">Nombre</label> <input type="text"
 								class="form-control" id="nombre" name="nombre"
@@ -71,8 +68,8 @@
 
 						<hr>
 								<div class="form-group" align="right">
-									<button type="submit" title="Guardar el registro."
-										class="btn btn-primary">Enviar</button>
+								
+									<button type="submit" title="Guardar el registro." class="btn btn-primary">Enviar</button>
 
 								</div>
 
@@ -81,8 +78,6 @@
 			</div>
 
 		</div>
-
-
 
 	</main>
 
@@ -93,6 +88,16 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+$(document).bind("submit", function () {
+    $(":button").html('<i class="fa fa-spinner fa-spin"></i> Enviando...');
+    $(":button").attr('disabled', 'disabled');
+}).bind("ajaxComplete", function () {
+    $(":button").html('<i class="fa fa-check"></i> Show');
+    $(":button").removeAttr('disabled', 'disabled');
+});
+</script>
 </body>
 </html>

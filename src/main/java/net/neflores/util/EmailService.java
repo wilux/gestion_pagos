@@ -1,4 +1,4 @@
-package net.neflores.service;
+package net.neflores.util;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
 
 @Service
-public class IEmailService {
+public class EmailService {
 
     @Autowired
     private JavaMailSender emailSender;

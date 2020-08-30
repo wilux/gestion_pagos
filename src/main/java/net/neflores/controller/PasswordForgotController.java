@@ -16,8 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import net.neflores.model.Mail;
 import net.neflores.model.Usuario;
 import net.neflores.repository.PasswordResetTokenRepository;
-import net.neflores.service.IEmailService;
 import net.neflores.service.IUsuarioService;
+import net.neflores.util.EmailService;
 import net.neflores.util.PasswordResetToken;
 
 @Controller
@@ -29,7 +29,7 @@ public class PasswordForgotController {
 	@Autowired
 	private PasswordResetTokenRepository tokenRepository;
 	@Autowired
-	private IEmailService emailService;
+	private EmailService emailService;
 
 	@GetMapping
 	public String displayForgotPasswordPage() {

@@ -67,5 +67,16 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+$(document).bind("submit", function () {
+    $(":button").html('<i class="fa fa-spinner fa-spin"></i> Enviando...');
+    $(":button").attr('disabled', 'disabled');
+}).bind("ajaxComplete", function () {
+    $(":button").html('<i class="fa fa-check"></i> Show');
+    $(":button").removeAttr('disabled', 'disabled');
+});
+</script>
 </body>
 </html>
