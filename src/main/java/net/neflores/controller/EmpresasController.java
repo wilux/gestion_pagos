@@ -1,16 +1,13 @@
 package net.neflores.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,22 +29,25 @@ public class EmpresasController {
 	
 	
 	@GetMapping(value = "/index")
-	public String mostrarEmpresas(Model model, Pageable page, Authentication auth) {
+	public String mostrarEmpresas() {
+
+		return "empresas/listEmpresas";		
+	}
+	
+	@ModelAttribute("empresas")
+	public List<Empresa> listarEmpresas(Model model, Authentication auth) {
 		String username = auth.getName();		
 		Usuario usuario = serviceUsuarios.buscarPorUsername(username);
-		List<Empresa> listaSimple = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
+		List<Empresa> empresas = serviceEmpresas.buscarPorUsuario(usuario.getIdUsuario());
 		
-		//Convierto la listaSimple en Pageable
-		Page<Empresa> lista = new PageImpl<>(listaSimple);	
-		model.addAttribute("empresas", lista);
-	
-		return "empresas/listEmpresas";		
+		return empresas;
+		
 	}
 	
     @PostMapping(value = "/save")
 	public String guardar(Empresa empresa, BindingResult result, RedirectAttributes attributes,Authentication auth) {
 		if (result.hasErrors()){		
-			System.out.println("Existieron errores");
+			attributes.addFlashAttribute("msg", "Ocurrio un Errror!");	
 			return "empresas/formEmpresas";
 		}	
 		

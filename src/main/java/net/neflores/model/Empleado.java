@@ -20,14 +20,7 @@ public class Empleado {
 	private Integer idEmpleado;
 	private String nombre;
 	private String apellido;
-	private String tipoDocumento;
-	private String dni;
 	private String cuil;
-	private String sexo;
-	private String estadoCivil;
-	private String fechaNacimiento;
-	private String paisNacimiento;
-	private String provinciaNacimiento;
 	private String cbu;
 	private double importe;
 	private int status;
@@ -99,62 +92,6 @@ public class Empleado {
 		this.usuario = usuario;
 	}
 
-
-	public String getTipoDocumento() {
-		return tipoDocumento;
-	}
-
-	public void setTipoDocumento(String tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
-	}
-
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
-	public String getEstadoCivil() {
-		return estadoCivil;
-	}
-
-	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
-	}
-
-	public String getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-	public String getPaisNacimiento() {
-		return paisNacimiento;
-	}
-
-	public void setPaisNacimiento(String paisNacimiento) {
-		this.paisNacimiento = paisNacimiento;
-	}
-
-	public String getProvinciaNacimiento() {
-		return provinciaNacimiento;
-	}
-
-	public void setProvinciaNacimiento(String provinciaNacimiento) {
-		this.provinciaNacimiento = provinciaNacimiento;
-	}
 
 	public int getStatus() {
 		return status;
