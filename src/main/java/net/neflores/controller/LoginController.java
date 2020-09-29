@@ -80,7 +80,7 @@ public class LoginController {
 		//Encriptamo password y lo asignamos 
 		usuario.setPassword(pwdEncriptado);
 		
-		usuario.setEstatus(1); // Activado por defecto
+		usuario.setStatus(1); // Activado por defecto
 		usuario.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor
 		
 		// Creamos el Perfil que le asignaremos al usuario nuevo

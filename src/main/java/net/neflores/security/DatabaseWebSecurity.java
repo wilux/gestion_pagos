@@ -23,7 +23,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource) //Para usar la BD con usuarios por defectos del framework
 		//Con lo que sigue personalizamos la toma de usuario y perfiles segun nuestra BD personalzada
-		.usersByUsernameQuery("select username, password, estatus from Usuario where username=?")
+		.usersByUsernameQuery("select username, password, status from Usuario where username=?")
 		.authoritiesByUsernameQuery("select u.username, p.perfil from UsuarioPerfil up " + 
 				"inner join Usuario u on u.idUsuario = up.idUsuario " +
 				"inner join Perfiles p on p.idPerfiles = up.idPerfil " +

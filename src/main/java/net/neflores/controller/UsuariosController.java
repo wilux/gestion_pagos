@@ -81,7 +81,7 @@ public class UsuariosController {
 		String pwdEncriptado = passwordEncoder.encode(pwdPlano);
 		//Encriptamo password y lo asignamos 
 		usuario.setPassword(pwdEncriptado);
-		usuario.setEstatus(1); // Activado por defecto
+		usuario.setStatus(1); // Activado por defecto
 		usuario.setFechaRegistro(new Date()); // Fecha de Registro, la fecha actual del servidor
 
 
