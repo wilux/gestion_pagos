@@ -16,7 +16,7 @@
 	<name>bpn_gestion</name>
 	<description>WebApp de gestión para usuarios bancarios</description>
 	<properties>
-		<java.version>13</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
@@ -64,6 +64,8 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+
 	</dependencies>
 
 	<build>
