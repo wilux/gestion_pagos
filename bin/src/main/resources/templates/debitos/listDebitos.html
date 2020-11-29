@@ -1,0 +1,66 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Debitos Directo</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header th:insert="fragments/menu :: menu-principal"></header>
+
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+
+        <div class="card">
+          <h4 class="card-header"><strong>Lista de Debitos</strong></h4>              
+          <div class="card-body">
+            <a class="btn btn-secondary btn-lg" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nuevo</a>       
+            <a class="btn btn-secondary btn-lg" role="button"><i class="fas fa-file" aria-hidden="true"></i> Generar Archivo</a> 
+            <hr>
+            <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+              <div class="table-responsive">  
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">CBU</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Importe 1er Vencimiento</th>
+                  <th scope="col">Importe 2do Vencimiento</th>
+                  <th scope="col">Importe 3er Vencimiento</th>
+                  <th scope="col">Modificar</th>
+                </tr>
+              </thead>                            
+              </tbody>
+            </table>
+            </div>
+<div class="alert alert-danger" role="alert">
+ Modulo no disponible por el momento
+</div>
+            
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+    </main>
+
+    <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>     
+  </body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Alta de Empleados</title>
+<!-- Bootstrap core CSS -->
+<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+<link th:href="@{/bootstrap/css/sticky-footer-navbar.css}"
+	rel="stylesheet">
+</head>
+
+<body>
+
+	<header th:insert="fragments/menu :: menu-principal"></header>
+
+	<main role="main">
+		<hr>
+
+		<div class="container">
+
+			<div class="card">
+
+				<h4 class="card-header">
+					<strong>Alta de Empleado para Nuevas Cuentas</strong>
+				</h4>
+
+				<div class="card-body">
+					<form th:action="@{/empleados/save}" method="post"
+						th:object="${empleado}">
+						<div th:if="${#fields.hasErrors('*')}" class='alert alert-danger'
+							role='alert'>
+							Por favor corrija los siguientes errores:
+							<ul>
+								<li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+							</ul>
+						</div>
+
+						<div class="card-body">
+
+							<strong>Empresa</strong>
+
+							<p>
+							<div class="card bg-light text-dark">
+								<br>
+								<div class="col-md-3">
+									<div class="form-group">
+										<select class="custom-select form-control"
+											name="nombreEmpresa">
+											<option th:each="emp : ${empresa}"
+												th:value="${emp.nombreEmpresa}"
+												th:text="${emp.nombreEmpresa}" th:data="${emp.idEmpresa}"></option>
+										</select> <input name="idEmpresa" id="idEmpresa" hidden="hidden"
+											value="" />
+									</div>
+								</div>
+							</div>
+
+							<br> <strong>Datos del Empleado</strong>
+
+							<p>
+							<div class="card">
+							<div class="card bg-light text-dark">
+
+							<div class="form-group row">
+									<div class="col-md-3">
+										<label for="nombre">Nombre</label> <input type="text"
+											class="form-control" th:field="*{nombre}" id="nombre"
+											name="nombre" placeholder="Nombre"
+											required="required">
+									</div>
+
+									<div class="col-md-3">
+										<label for="descripcion">Apellido</label> <input type="text"
+											class="form-control" th:field="*{apellido}" id="apellido"
+											name="apellido"
+											placeholder="Apellido"
+											required="required">
+									</div>
+								
+</div>
+				
+
+
+
+								<div class="form-group row">
+									<div class="col-md-3">
+										<label for="descripcion">Tipo Documento</label> <select
+											class="form-control" id="exampleFormControlSelect1">
+											<option>DNI</option>
+											<option>LE</option>
+											<option>LC</option>
+											<option>CI</option>
+											<option>CI PROV. EXT</option>
+											<option>PASAP. EXTR</option>
+										</select>
+									</div>
+
+									<div class="col-md-3">
+
+										<label for="descripcion">DNI</label> <input type="text"
+											class="form-control" id="dni" name="dni" placeholder="DNI"
+											required="required">
+									</div>
+									<div class="col-md-3">
+
+										<label for="descripcion">Cuil</label> <input type="text"
+											class="form-control" th:field="*{cuil}" id="cuil" name="cuil"
+											placeholder="CUIL" required="required">
+									</div>
+								
+</div>
+								<div class="form-group row">
+									<div class="col-md-3">
+										<label for="descripcion">Sexo</label> <select
+											class="form-control" id="exampleFormControlSelect1">
+											<option>Masculino</option>
+											<option>Femenimo</option>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<label for="descripcion">Estado Civil</label> <select
+											class="form-control" id="exampleFormControlSelect1">
+											<option>Casado</option>
+											<option>Divorciado</option>
+											<option>Separado</option>
+											<option>Soltero</option>
+											<option>Viudo</option>
+											<option>Union de Hecho</option>
+										</select>
+									</div>
+									
+									
+									<div class="col-md-3">
+										<label for="descripcion">Fecha de Nacimiento</label> <input
+											type="text" class="form-control" id="dni" name="dni"
+											placeholder="Fecha de Nacimiento" required="required">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-md-3">
+										<label for="descripcion">Pais de Nacimiento</label> <select
+											class="form-control" id="exampleFormControlSelect1">
+											<option>Argentina</option>
+											<option>Otro</option>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<label for="descripcion">Provincia de Nacimiento</label> <select
+											class="form-control" id="exampleFormControlSelect1">
+											<option>Neuquen</option>
+											<option>Otra</option>
+										</select>
+									</div>
+								</div>
+</div>
+
+							</div>
+
+							<br> <strong>Domicilio</strong>
+
+							<p>
+							<div class="card bg-light text-dark">
+								<div class="form-group row">
+									<div class="col-md-8">
+										<label for="descripcion">Calle</label> <input type="text"
+											class="form-control" id="dni" name="dni" placeholder="Calle"
+											required="required">
+									</div>
+									<div class="col-md-4">
+										<label for="descripcion">Número</label> <input type="text"
+											class="form-control" id="dni" name="dni" placeholder="Número"
+											required="required">
+									</div>
+									<div class="col-md-4">
+										<label for="descripcion">Piso</label> <input type="text"
+											class="form-control" id="dni" name="dni" placeholder="Piso"
+											required="required">
+									</div>
+									<div class="col-md-4">
+										<label for="descripcion">Dpto</label> <input type="text"
+											class="form-control" id="dni" name="dni" placeholder="Dpto"
+											required="required">
+									</div>
+								</div>
+
+
+								<div class="form-group row">
+									<div class="col-md-8">
+										<label for="descripcion">Barrio</label> <input type="text"
+											class="form-control" id="dni" name="dni" placeholder="Barrio"
+											required="required">
+									</div>
+									<div class="col-md-4">
+										<label for="descripcion">Provincia</label> <input type="text"
+											class="form-control" id="dni" name="dni"
+											placeholder="Provincia" required="required">
+									</div>
+									<div class="col-md-4">
+										<label for="descripcion">Localidad</label> <input type="text"
+											class="form-control" id="dni" name="dni"
+											placeholder="Localidad" required="required">
+									</div>
+									<div class="col-md-4">
+										<label for="descripcion">Codigo Postal</label> <input
+											type="text" class="form-control" id="dni" name="dni"
+											placeholder="Codigo Postal" required="required">
+									</div>
+
+								</div>
+</div>
+							</div>
+
+							<hr>
+							<button type="submit" title="Guardar el registro."
+								class="btn btn-primary">Guardar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- /container -->
+
+	</main>
+
+	<footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/code.js}"></script>
+</body>
+</html>
